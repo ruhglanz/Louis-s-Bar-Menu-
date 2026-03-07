@@ -1,0 +1,36 @@
+body {
+  background-color: #F2F2F7;
+  font-family: -apple-system, sans-serif;
+  color: #1C1C1E;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #004080;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #3A3A3C;
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  letter-spacing: 1px;       
+}
+
+p {
+  font-size: 18px;
+  margin: 15px 0;
+}
+
+button {
+  background-color: #007AFF; 
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 12px;      
+  font-weight: 600;
+  cursor: pointer;
+}
