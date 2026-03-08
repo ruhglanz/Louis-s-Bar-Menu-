@@ -1,15 +1,14 @@
 function showOrderToast(drinkName) {
     const toast = document.getElementById('toast');
-    toast.innerText = `Preparing your ${drinkName}...`;
+    toast.innerText = `Connecting to Bartender for ${drinkName}...`;
     toast.className = "toast-hidden toast-show";
-
-    if (window.navigator.vibrate) {
-        window.navigator.vibrate(20);
-    }
 
     const phoneNumber = "601116260164";
     const message = encodeURIComponent(`Hello! I would like to order: ${drinkName} 🍹`);
-    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+
+    const whatsappUrl = `whatsapp://send?phone=${phoneNumber}&text=${message}`;
+    
+    window.location.href = whatsappUrl;
 
     setTimeout(() => {
         toast.className = "toast-hidden";
