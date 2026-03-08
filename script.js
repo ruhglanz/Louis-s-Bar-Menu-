@@ -1,15 +1,19 @@
-function showOrderToast() {
+function showOrderToast(drinkName) {
     const toast = document.getElementById('toast');
-    
+    toast.innerText = `Preparing your ${drinkName}...`;
     toast.className = "toast-hidden toast-show";
-    
-    setTimeout(() => {
-        toast.className = "toast-hidden";
-    }, 2500);
 
     if (window.navigator.vibrate) {
         window.navigator.vibrate(20);
     }
+
+    const phoneNumber = "601116260164";
+    const message = encodeURIComponent(`Hello! I would like to order: ${drinkName} 🍹`);
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+
+    setTimeout(() => {
+        toast.className = "toast-hidden";
+    }, 3000);
 }
 
 document.addEventListener('mousemove', (e) => {
