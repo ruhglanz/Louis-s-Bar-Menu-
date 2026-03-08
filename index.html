@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome to Louis's Bar</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Welcome to Louis's Bar</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+    <h1>Louis's Bar</h1>
+    <h2>MENU</h2>
 
-<h1>Louis's Bar</h1>
-<h2>Menu</h2>
-<p>1. Bartender Special</p><button onclick="sayHi()">Order this</button>
-<p>2. Ruhglanz</p><button onclick="sayHi()">Order this</button>
-<p>3. Cocktail</p><button onclick="sayHi()">Order this</button>
+    <div class="menu-card">
+        <p class="dish-name">1. Bartender Special</p>
+        <img src="bartenderspecial.jpg" class="menu-img">
+        <button onclick="showOrderToast()">Order this</button>
+    </div>
 
-<script src="script.js"></script>
+    <div class="menu-card">
+        <p class="dish-name">2. Ruhglanz</p>
+        <img src="ruhglanz.jpg" class="menu-img">
+        <button onclick="showOrderToast()">Order this</button>
+    </div>
 
+    <div class="menu-card">
+        <p class="dish-name">3. Cocktail</p>
+        <img src="cocktail.jpg" class="menu-img">
+        <button onclick="showOrderToast()">Order this</button>
+    </div>
+
+    <div id="toast" class="toast-hidden">Your order has been placed! 🍸</div>
+
+    <script src="script.js"></script>
 </body>
 </html>
