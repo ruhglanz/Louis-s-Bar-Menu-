@@ -1,5 +1,6 @@
 let cart = {}; 
 
+// 添加到购物车
 function addToCart(name, price) {
     if (cart[name]) {
         cart[name].qty += 1;
@@ -13,6 +14,7 @@ function addToCart(name, price) {
     showToast(`Added ${name} to tray!`);
 }
 
+// 从购物车移除
 function removeFromCart(name) {
     if (cart[name]) {
         cart[name].qty -= 1;
@@ -24,6 +26,7 @@ function removeFromCart(name) {
     renderCartModal(); 
 }
 
+// 更新底部购物车栏
 function updateUI() {
     let totalQty = 0;
     for (let key in cart) {
@@ -41,6 +44,7 @@ function updateUI() {
     }
 }
 
+// 切换购物车弹窗
 function toggleCartModal() {
     const container = document.getElementById('cart-container');
     if (container.classList.contains('modal-active')) {
@@ -51,6 +55,7 @@ function toggleCartModal() {
     }
 }
 
+// 渲染购物车内容 (含空态优化)
 function renderCartModal() {
     const listContainer = document.getElementById('cart-items-list');
     
@@ -61,7 +66,14 @@ function renderCartModal() {
 
     const keys = Object.keys(cart);
     if (keys.length === 0) {
-        listContainer.innerHTML += `<div style="padding: 40px 0; opacity: 0.5;">Your tray is empty...</div>`;
+        // 空购物车优化
+        listContainer.innerHTML += `
+            <div class="empty-cart">
+                <i>🍹</i>
+                <div>Your tray is empty...</div>
+                <div style="font-size: 12px;">Add your favorite drinks!</div>
+            </div>
+        `;
         return;
     }
 
@@ -83,6 +95,7 @@ function renderCartModal() {
     }
 }
 
+// 提示弹窗
 function showToast(msg) {
     const toast = document.getElementById('toast');
     toast.innerText = msg;
@@ -90,7 +103,7 @@ function showToast(msg) {
     setTimeout(() => { toast.classList.remove('toast-show'); }, 2000);
 }
 
-// 全新 WhatsApp 文案（只显示杯数，无价格）
+// WhatsApp 下单 (无价格文案)
 function sendWhatsAppOrder() {
     let orderText = "Hello! I would like to order:\n\n";
     for (let name in cart) {
@@ -102,12 +115,14 @@ function sendWhatsAppOrder() {
     window.location.href = url;
 }
 
+// 背景微动效 (减弱幅度，更柔和)
 document.addEventListener('mousemove', (e) => {
     const x = e.clientX / window.innerWidth;
     const y = e.clientY / window.innerHeight;
-    document.body.style.backgroundPosition = `${x * 20}px ${y * 20}px`;
+    document.body.style.backgroundPosition = `${x * 10}px ${y * 10}px`; // 从20px改为10px，更平缓
 });
 
+// 菜单过滤功能
 function filterMenu(category, event) {
     const tabs = document.querySelectorAll('.tab-btn');
     tabs.forEach(tab => tab.classList.remove('active'));
@@ -123,7 +138,7 @@ function filterMenu(category, event) {
             card.classList.remove('hide-card');
             
             card.style.animation = 'none';
-            card.offsetHeight;
+            card.offsetHeight; // 强制重绘
             card.style.animation = `fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) ${delay}s forwards`;
             
             delay += 0.1; 
@@ -132,3 +147,17 @@ function filterMenu(category, event) {
         }
     });
 }
+
+// 图片加载完成后添加淡入效果 (新增核心功能)
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.menu-img').forEach(img => {
+        // 图片加载完成
+        img.onload = function() {
+            this.classList.add('loaded');
+        };
+        // 若图片已缓存，直接显示
+        if (img.complete) {
+            img.classList.add('loaded');
+        }
+    });
+});
