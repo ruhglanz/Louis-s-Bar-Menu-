@@ -10,48 +10,60 @@
     <h1>Louis's Bar</h1>
     <h2>MENU</h2>
 
-    <section class="menu-section">
-        <h3 class="section-title">Alcoholic 🍸</h3>
-        <div class="menu-card">
+    <div class="category-tabs">
+        <button class="tab-btn active" onclick="filterMenu('all', event)">All</button>
+        <button class="tab-btn" onclick="filterMenu('custom', event)">Custom (定做)</button>
+        <button class="tab-btn" onclick="filterMenu('alcoholic', event)">Alcoholic</button>
+        <button class="tab-btn" onclick="filterMenu('non-alcoholic', event)">Non-Alcoholic</button>
+        <button class="tab-btn" onclick="filterMenu('wine', event)">Wine</button>
+        <button class="tab-btn" onclick="filterMenu('others', event)">Others</button>
+    </div>
+
+    <section class="menu-section" id="menu-items-container">
+        
+        <div class="menu-card" data-category="custom alcoholic">
+            <div class="badge">Best Seller ✨</div>
             <p class="dish-name">1. Bartender Special</p>
             <img src="bartenderspecial.jpg" class="menu-img" alt="Bartender Special">
             <span class="price-tag">RM 0.01</span>
             <button onclick="addToCart('Bartender Special', 0.01)">Add to Cart</button>
         </div>
-        <div class="menu-card">
+        
+        <div class="menu-card" data-category="custom alcoholic">
             <p class="dish-name">2. Ruhglanz</p>
             <img src="ruhglanz.jpg" class="menu-img" alt="Ruhglanz">
             <span class="price-tag">RM 0.01</span>
             <button onclick="addToCart('Ruhglanz', 0.01)">Add to Cart</button>
         </div>
-        <div class="menu-card">
+        
+        <div class="menu-card" data-category="custom alcoholic">
             <p class="dish-name">3. Curated by Khaimin</p>
             <img src="curatedbykhaimin.jpg" class="menu-img" alt="Curated by Khaimin">
             <span class="price-tag">RM 0.01</span>
             <button onclick="addToCart('Curated by Khaimin', 0.01)">Add to Cart</button>
         </div>
-    </section>
 
-    <section class="menu-section">
-        <h3 class="section-title">Non-Alcoholic 🥤</h3>
-        <div class="menu-card">
+        <div class="menu-card" data-category="non-alcoholic">
             <p class="dish-name">4. Mojito (Virgin)</p>
             <img src="mojito.jpg" class="menu-img" alt="Mojito">
             <span class="price-tag">RM 0.01</span>
             <button onclick="addToCart('Mojito', 0.01)">Add to Cart</button>
         </div>
-        <div class="menu-card">
+        
+        <div class="menu-card" data-category="non-alcoholic">
             <p class="dish-name">5. Mocktail</p>
             <img src="mocktail.jpg" class="menu-img" alt="Mocktail">
             <span class="price-tag">RM 0.01</span>
             <button onclick="addToCart('Mocktail', 0.01)">Add to Cart</button>
         </div>
-        <div class="menu-card">
+        
+        <div class="menu-card" data-category="non-alcoholic">
             <p class="dish-name">6. Smoothie</p>
             <img src="milkshake.jpg" class="menu-img" alt="Smoothie">
             <span class="price-tag">RM 0.01</span>
             <button onclick="addToCart('Smoothie', 0.01)">Add to Cart</button>
         </div>
+        
     </section>
 
     <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
