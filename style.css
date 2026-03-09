@@ -22,7 +22,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
    ========================================= */
 #menu-items-container {
     display: grid;
-    /* 电脑端：最小宽度280px，自动适配列数，保持原有效果 */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
     max-width: 1050px; 
@@ -32,7 +31,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   3. 菜单卡片 (玻璃拟态 & 紧凑文字)
+   3. 菜单卡片 (玻璃拟态 & 完美对齐)
    ========================================= */
 .menu-card {
     display: flex; 
@@ -52,9 +51,15 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transform: translateY(30px);
     animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     position: relative; 
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    /* 新增：强制所有卡片高度一致 */
+    transition: all 0.3s ease; /* 新增：卡片悬停过渡 */
     height: 100%;
+}
+
+/* 优化1: 卡片悬停效果 (提升交互感) */
+.menu-card:hover {
+    transform: translateY(-5px); /* 轻微上浮 */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(255, 255, 255, 0.08);
+    border-color: rgba(197, 160, 89, 0.3); /* 金边微光 */
 }
 
 .menu-img {
@@ -65,8 +70,9 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     border-radius: 25px; 
     margin: 15px 0; 
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-    /* 新增：确保图片在卡片内位置一致 */
     flex-shrink: 0;
+    /* 优化2: 图片加载过渡 (防止突兀) */
+    transition: opacity 0.5s ease;
 }
 
 .dish-name {
@@ -76,7 +82,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin: 5px 0; 
     line-height: 1.4; 
     letter-spacing: -0.01em;
-    /* 新增：固定文字高度，避免换行导致卡片高度不一致 */
     min-height: 2.8em;
     display: flex;
     align-items: center;
@@ -91,7 +96,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   4. 核心按钮与 Qty 按钮 (主题色)
+   4. 核心按钮与 Qty 按钮 (主题色 & 微交互)
    ========================================= */
 .menu-card button, #order-now-btn, .checkout-btn, .confirm-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
@@ -104,12 +109,18 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     cursor: pointer; 
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2);
-    /* 新增：按钮固定在卡片底部 */
     margin-top: auto;
 }
 
+/* 优化3: 按钮悬停与点击效果 (更有质感) */
+.menu-card button:hover, #order-now-btn:hover, .checkout-btn:hover {
+    background: linear-gradient(135deg, #e6c588 0%, #d4b475 100%);
+    box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+    transform: translateY(-2px);
+}
+
 .menu-card button:active, #order-now-btn:active { 
-    transform: scale(0.95); 
+    transform: scale(0.95) translateY(-2px); /* 修正点击位置 */
     opacity: 0.9; 
 }
 
@@ -160,11 +171,17 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* 优化4: 标签选中态强化 (视觉更清晰) */
 .tab-btn.active {
-    background: rgba(197, 160, 89, 0.25); 
+    background: rgba(197, 160, 89, 0.35); 
     color: #fdfcfb; 
-    border: 1px solid rgba(197, 160, 89, 0.5); 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #c5a059; /* 实心金边 */
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); /* 金色辉光 */
+}
+
+.tab-btn:not(.active):hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* =========================================
@@ -230,7 +247,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 .close-tray:hover { 
     color: #c5a059; 
-    transform: rotate(90deg); 
+    transform: rotate(90deg) scale(1.1); /* 轻微放大 */
 }
 
 .cart-bar {
@@ -288,14 +305,12 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 /* =========================================
    8. 响应式终极修复 (手机强制两列 + 完美对齐)
    ========================================= */
-/* 手机端（768px以下）强制两列，优先级最高 */
 @media screen and (max-width: 768px) {
     #menu-items-container {
         grid-template-columns: 1fr 1fr !important;
         gap: 12px !important;
         padding: 0 6px !important;
         max-width: 100% !important;
-        /* 新增：确保网格行高一致 */
         grid-auto-rows: 1fr;
     }
     .menu-card {
@@ -341,7 +356,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     }
 }
 
-/* 电脑端（768px以上）保持原有效果 */
 @media screen and (min-width: 769px) {
     #menu-items-container {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
@@ -357,7 +371,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   9. 其他样式
+   9. 其他样式 & 入场动画优化
    ========================================= */
 .badge {
     position: absolute; 
@@ -374,9 +388,14 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transform: rotate(5deg);
 }
 
+/* 优化5: 交错入场动画 (更有高级感) */
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(30px); } 
     to { opacity: 1; transform: translateY(0); } 
 }
+
+/* 给不同卡片设置不同的延迟 */
+.menu-card:nth-child(2n+1) { animation-delay: 0.1s; }
+.menu-card:nth-child(2n) { animation-delay: 0.2s; }
 
 .hide-card { display: none !important; }
