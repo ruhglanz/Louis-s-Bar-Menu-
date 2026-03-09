@@ -2,7 +2,7 @@
    1. 基础背景与整体氛围 (极致暗黑)
    ========================================= */
 body {
-    background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
+    background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a086 100%);
     background-size: 110% 110%; 
     background-attachment: fixed;
     min-height: 100vh;
@@ -51,15 +51,14 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transform: translateY(30px);
     animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     position: relative; 
-    transition: all 0.3s ease; /* 新增：卡片悬停过渡 */
+    transition: all 0.3s ease;
     height: 100%;
 }
 
-/* 优化1: 卡片悬停效果 (提升交互感) */
 .menu-card:hover {
-    transform: translateY(-5px); /* 轻微上浮 */
+    transform: translateY(-5px);
     box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(255, 255, 255, 0.08);
-    border-color: rgba(197, 160, 89, 0.3); /* 金边微光 */
+    border-color: rgba(197, 160, 89, 0.3);
 }
 
 .menu-img {
@@ -71,7 +70,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin: 15px 0; 
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     flex-shrink: 0;
-    /* 优化2: 图片加载过渡 (防止突兀) */
     transition: opacity 0.5s ease;
 }
 
@@ -88,15 +86,8 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     justify-content: center;
 }
 
-.price-tag { 
-    font-size: 20px; 
-    color: #c5a059 !important; 
-    font-weight: 700; 
-    margin-bottom: 12px; 
-}
-
 /* =========================================
-   4. 核心按钮与 Qty 按钮 (主题色 & 微交互)
+   4. 按钮
    ========================================= */
 .menu-card button, #order-now-btn, .checkout-btn, .confirm-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
@@ -112,7 +103,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin-top: auto;
 }
 
-/* 优化3: 按钮悬停与点击效果 (更有质感) */
 .menu-card button:hover, #order-now-btn:hover, .checkout-btn:hover {
     background: linear-gradient(135deg, #e6c588 0%, #d4b475 100%);
     box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
@@ -120,7 +110,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 .menu-card button:active, #order-now-btn:active { 
-    transform: scale(0.95) translateY(-2px); /* 修正点击位置 */
+    transform: scale(0.95) translateY(-2px);
     opacity: 0.9; 
 }
 
@@ -140,7 +130,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   5. 分类标签栏 (修复居中 & 冰感玻璃)
+   5. 分类标签
    ========================================= */
 .category-tabs {
     display: flex; 
@@ -171,12 +161,11 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* 优化4: 标签选中态强化 (视觉更清晰) */
 .tab-btn.active {
     background: rgba(197, 160, 89, 0.35); 
     color: #fdfcfb; 
-    border: 1px solid #c5a059; /* 实心金边 */
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); /* 金色辉光 */
+    border: 1px solid #c5a059; 
+    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
 }
 
 .tab-btn:not(.active):hover {
@@ -185,7 +174,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   6. 底部 Tray (宽度对齐修复 & 旋转修复)
+   6. 购物车底部栏
    ========================================= */
 .cart-container {
     position: fixed; 
@@ -247,7 +236,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 .close-tray:hover { 
     color: #c5a059; 
-    transform: rotate(90deg) scale(1.1); /* 轻微放大 */
+    transform: rotate(90deg) scale(1.1);
 }
 
 .cart-bar {
@@ -275,7 +264,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   7. Toast 通知 (增强冰感玻璃 & 换行修复)
+   7. 提示弹窗
    ========================================= */
 .toast-hidden {
     position: fixed; 
@@ -303,7 +292,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 .toast-show { top: 40px; }
 
 /* =========================================
-   8. 响应式终极修复 (手机强制两列 + 完美对齐)
+   8. 手机端：底部栏变小 + 两列布局
    ========================================= */
 @media screen and (max-width: 768px) {
     #menu-items-container {
@@ -335,10 +324,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
         align-items: center !important;
         justify-content: center !important;
     }
-    .price-tag {
-        font-size: 15px !important;
-        margin-bottom: 8px !important;
-    }
     .menu-card button {
         padding: 7px 12px !important;
         font-size: 12px !important;
@@ -353,6 +338,23 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
         white-space: normal !important;
         text-align: center !important;
         padding: 12px 18px !important;
+    }
+
+    /* 手机底部栏变小 */
+    .cart-bar {
+        padding: 10px 16px !important;
+        border-radius: 20px !important;
+    }
+    .tap-hint {
+        font-size: 11px !important;
+        margin: 0 !important;
+    }
+    #order-now-btn {
+        padding: 6px 12px !important;
+        font-size: 12px !important;
+    }
+    .cart-info {
+        font-size: 13px !important;
     }
 }
 
@@ -371,7 +373,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   9. 其他样式 & 入场动画优化
+   9. 其他
    ========================================= */
 .badge {
     position: absolute; 
@@ -388,13 +390,11 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transform: rotate(5deg);
 }
 
-/* 优化5: 交错入场动画 (更有高级感) */
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(30px); } 
     to { opacity: 1; transform: translateY(0); } 
 }
 
-/* 给不同卡片设置不同的延迟 */
 .menu-card:nth-child(2n+1) { animation-delay: 0.1s; }
 .menu-card:nth-child(2n) { animation-delay: 0.2s; }
 
