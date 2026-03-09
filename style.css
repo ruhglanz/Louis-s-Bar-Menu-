@@ -48,18 +48,31 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin-bottom: 15px; 
 }
 
-/* 3. 按钮样式 - 增强手机端瞬时反馈 */
+/* 3. 按钮样式修复 - 解决文字过长 & 发光粘滞 */
 .menu-card button, #order-now-btn, .checkout-btn {
     background: #c5a059;
-    color: #1a130f; border: none !important;
-    padding: 12px 25px; border-radius: 20px; font-size: 16px;
-    font-weight: 700; cursor: pointer; 
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #1a130f; 
+    border: none !important;
+    padding: 12px 20px; /* 略微缩小左右内边距防止文字顶边 */
+    border-radius: 20px; 
+    font-size: 16px;
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    
+    /* 解决文字过长：允许自动换行并保持居中 */
+    min-width: 120px;
+    max-width: 90%; 
+    line-height: 1.2;
+    word-wrap: break-word;
+    
+    /* 关键：清除移动端默认点击高亮 */
     -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
-/* 仅在有鼠标的设备上启用悬停发光 */
+/* 仅在【支持鼠标悬停】的设备（电脑）上显示 Hover */
 @media (hover: hover) {
     .menu-card button:hover, #order-now-btn:hover, .checkout-btn:hover {
         background: #d4b475; 
@@ -69,13 +82,13 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     }
 }
 
-/* 手机端与电脑端的点击瞬间反馈：按下变亮并轻微缩小 */
+/* 手机端点击瞬间：按下即亮，松开即灭 */
 .menu-card button:active, #order-now-btn:active, .checkout-btn:active {
-    background: #d4b475; 
-    filter: brightness(1.3); 
-    transform: scale(0.95); /* 模拟物理下压感 */
-    box-shadow: 0 2px 8px rgba(197, 160, 89, 0.6);
-    transition: all 0.05s; /* 极速反馈 */
+    background: #e6c88a !important; /* 强制按下时变亮 */
+    transform: scale(0.94) !important; /* 明显的下压感 */
+    filter: brightness(1.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: 0s; /* 瞬间反馈，不拖泥带水 */
 }
 
 /* 4. 底部 Tray & 抽屉 */
@@ -124,22 +137,21 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin-bottom: -5px; padding-bottom: 45px;
 }
 
-/* 5. Toast 修复版：彻底隐藏 + 物理回弹曲线 */
+/* 5. Toast 彻底隐藏修复 */
 .toast-hidden {
     position: fixed;
-    top: -120px; /* 深埋顶部，彻底解决残留问题 */
+    top: -150px; /* 进一步增加隐藏深度 */
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(197, 160, 89, 0.9); 
+    background: rgba(197, 160, 89, 0.95); 
     backdrop-filter: blur(10px) saturate(140%); 
     -webkit-backdrop-filter: blur(10px) saturate(140%);
     color: #1a130f;
     padding: 14px 35px;
     border-radius: 30px;
     font-weight: 700;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.1);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
     border: 1px solid rgba(255,255,255,0.25);
-    /* 使用更具弹性的贝塞尔曲线 */
     transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 3000;
 }
