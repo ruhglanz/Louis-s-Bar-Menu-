@@ -7,6 +7,10 @@ function addToCart(name, price) {
         cart[name] = { price: price, qty: 1 };
     }
     updateUI();
+    // 只有在面板打开时才重绘，避免性能浪费
+    if (document.getElementById('cart-container').classList.contains('modal-active')) {
+        renderCartModal(); 
+    }
     showToast(`Added ${name} to tray!`);
 }
 
@@ -35,9 +39,9 @@ function updateUI() {
     document.getElementById('modal-total').innerText = `RM ${totalPrice.toFixed(2)}`;
 
     if (totalQty > 0) {
-        container.className = "cart-container cart-container-show";
+        container.classList.add('cart-container-show');
     } else {
-        container.className = "cart-container";
+        container.classList.remove('cart-container-show');
         container.classList.remove('modal-active');
     }
 }
@@ -54,19 +58,30 @@ function toggleCartModal() {
 
 function renderCartModal() {
     const listContainer = document.getElementById('cart-items-list');
-    listContainer.innerHTML = ""; 
+    
+    // 【唯一打叉渲染】
+    listContainer.innerHTML = `
+        <div class="close-tray" onclick="toggleCartModal()">&times;</div>
+        <h3 style="margin: 0 0 20px 0; color: #fdfcfb; font-size: 20px; text-align: left;">Your Tray</h3>
+    `; 
+
+    const keys = Object.keys(cart);
+    if (keys.length === 0) {
+        listContainer.innerHTML += `<div style="padding: 40px 0; opacity: 0.5;">Your tray is empty...</div>`;
+        return;
+    }
 
     for (let name in cart) {
         const item = cart[name];
         const itemHtml = `
-            <div class="cart-item">
+            <div class="cart-item" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                 <div class="item-info" style="text-align: left;">
-                    <div class="item-name" style="font-weight:bold;">${name}</div>
-                    <div class="item-price">RM ${item.price.toFixed(2)}</div>
+                    <div class="item-name" style="font-weight:700; color:#fdfcfb;">${name}</div>
+                    <div class="item-price" style="color:#c5a059;">RM ${item.price.toFixed(2)}</div>
                 </div>
                 <div class="qty-controls" style="display:flex; align-items:center; gap:10px;">
                     <button class="qty-btn" onclick="removeFromCart('${name}')">−</button>
-                    <span class="item-qty">${item.qty}</span>
+                    <span class="item-qty" style="color:#fdfcfb; min-width:20px; text-align:center;">${item.qty}</span>
                     <button class="qty-btn" onclick="addToCart('${name}', ${item.price})">+</button>
                 </div>
             </div>
@@ -78,8 +93,8 @@ function renderCartModal() {
 function showToast(msg) {
     const toast = document.getElementById('toast');
     toast.innerText = msg;
-    toast.className = "toast-hidden toast-show";
-    setTimeout(() => { toast.className = "toast-hidden"; }, 2000);
+    toast.classList.add('toast-show');
+    setTimeout(() => { toast.classList.remove('toast-show'); }, 2000);
 }
 
 function sendWhatsAppOrder() {
