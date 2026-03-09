@@ -52,14 +52,13 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 
 .dish-name {
     font-size: 19px; font-weight: 700; color: #fdfcfb; margin: 5px 0; 
-    line-height: 1.4; /* 紧凑行间距修复 */
-    letter-spacing: -0.01em;
+    line-height: 1.4; letter-spacing: -0.01em;
 }
 
 .price-tag { font-size: 20px; color: #c5a059 !important; font-weight: 700; margin-bottom: 12px; }
 
 /* =========================================
-   4. 核心按钮与 Qty 按钮 (主题色修复)
+   4. 核心按钮与 Qty 按钮 (主题色)
    ========================================= */
 .menu-card button, #order-now-btn, .checkout-btn, .confirm-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
@@ -70,7 +69,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 
 .menu-card button:active, #order-now-btn:active { transform: scale(0.95); opacity: 0.9; }
 
-/* 购物车内的金色 Qty 按钮修复 */
 .qty-btn {
     background: rgba(197, 160, 89, 0.1) !important; 
     color: #c5a059 !important; 
@@ -79,25 +77,31 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     cursor: pointer; display: flex; align-items: center; justify-content: center;
     transition: all 0.2s;
 }
-.qty-btn:active { background: rgba(197, 160, 89, 0.2) !important; transform: scale(0.9); }
 
 /* =========================================
-   5. 分类标签栏 (增强玻璃感)
+   5. 分类标签栏 (修复居中 & 冰感玻璃)
    ========================================= */
 .category-tabs {
-    display: flex; gap: 9px; /* 紧凑间距修复 */
-    overflow-x: auto; padding: 10px 20px; 
-    margin: 0 auto 30px auto; max-width: 900px; 
-    scrollbar-width: none; -ms-overflow-style: none;
+    display: flex; 
+    gap: 12px; 
+    overflow-x: auto; 
+    padding: 10px 20px; 
+    margin: 0 auto 30px auto; 
+    max-width: 900px; 
+    /* 核心修改：确保 Tab 在大屏幕居中 */
+    justify-content: center; 
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch; /* 手机滑动惯性 */
 }
 .category-tabs::-webkit-scrollbar { display: none; }
 
 .tab-btn {
     background: rgba(255, 255, 255, 0.08); 
-    color: #e2d1c3; border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #e2d1c3; 
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 9px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer;
     white-space: nowrap; 
-    /* 增强模糊与饱和度 */
     backdrop-filter: blur(20px) saturate(180%); 
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -111,12 +115,15 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 /* =========================================
-   6. 底部 Tray (无缝连接 & 旋转修复)
+   6. 底部 Tray (宽度对齐修复 & 旋转修复)
    ========================================= */
 .cart-container {
     position: fixed; bottom: -500px; left: 50%; transform: translateX(-50%);
-    width: 92%; max-width: 500px; z-index: 2000;
-    transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: none;
+    width: 95%; /* 手机端自适应宽度 */
+    max-width: 500px; z-index: 2000;
+    transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1); 
+    pointer-events: none;
+    display: flex; flex-direction: column; align-items: center;
 }
 .cart-container-show { bottom: 30px !important; }
 
@@ -125,6 +132,8 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     border-radius: 30px 30px 0 0; border: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none;
     opacity: 0; visibility: hidden; max-height: 0; padding: 0 25px; overflow: hidden;
     transform: translateY(20px); transition: all 0.4s ease; position: relative;
+    /* 核心修改：强制内容与底座宽度 100% 对齐 */
+    width: 100%; box-sizing: border-box; 
 }
 
 .modal-active .modal-content { 
@@ -132,19 +141,14 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     max-height: 600px; padding: 30px 25px 25px 25px; pointer-events: auto;
 }
 
-/* 打叉按钮旋转修复 */
 .close-tray {
     position: absolute; top: 18px; right: 20px; font-size: 32px; 
     color: rgba(255, 255, 255, 0.3); cursor: pointer; width: 40px; height: 40px; 
     display: flex; align-items: center; justify-content: center;
-    /* 修复：显式添加 transform 过渡 */
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
     z-index: 100;
 }
-.close-tray:hover { 
-    color: #c5a059; 
-    transform: rotate(90deg); /* 触发旋转 */
-}
+.close-tray:hover { color: #c5a059; transform: rotate(90deg); }
 
 .cart-bar {
     background: rgba(30, 25, 20, 0.95); backdrop-filter: blur(25px) saturate(180%);
@@ -152,6 +156,8 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     justify-content: space-between !important; align-items: center !important;
     border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 15px 45px rgba(0,0,0,0.6);
     position: relative; z-index: 5; pointer-events: auto;
+    /* 核心修改：强制宽度一致 */
+    width: 100%; box-sizing: border-box;
     transition: border-radius 0.3s ease;
 }
 
@@ -163,31 +169,27 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 .toast-hidden {
     position: fixed; top: -180px; left: 50%; transform: translateX(-50%);
     background: rgba(197, 160, 89, 0.75); 
-    /* 核心修复：极致模糊与色彩饱和 */
     backdrop-filter: blur(25px) saturate(200%); 
     -webkit-backdrop-filter: blur(25px) saturate(200%);
     color: #1a130f; padding: 14px 30px; border-radius: 28px;
     font-weight: 700; font-size: 14px; z-index: 3000;
-    border: 1px solid rgba(255, 255, 255, 0.4); /* 边缘高光 */
+    border: 1px solid rgba(255, 255, 255, 0.4); 
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     transition: top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     
-    /* 换行修复：保持单行 */
-    width: max-content; 
-    max-width: 85vw; 
-    white-space: nowrap; 
-    overflow: hidden; text-overflow: ellipsis;
+    width: max-content; max-width: 85vw; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .toast-show { top: 40px; }
 
-/* 针对窄屏手机的微调 */
-@media (max-width: 480px) {
-    .toast-hidden { white-space: normal; text-align: center; padding: 12px 20px; line-height: 1.3; }
+/* =========================================
+   8. 响应式与动画
+   ========================================= */
+@media (max-width: 600px) {
+    .category-tabs { justify-content: flex-start; } /* 窄屏时允许滑动 */
+    .toast-hidden { white-space: normal; text-align: center; padding: 12px 20px; }
 }
 
-/* =========================================
-   8. 动画与小组件
-   ========================================= */
 .badge {
     position: absolute; top: -10px; right: -10px; 
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
