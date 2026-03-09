@@ -16,7 +16,7 @@ body {
 h1 { color: #fdfcfb; text-shadow: 0 4px 20px rgba(0,0,0,0.5); font-weight: 800; }
 h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing: 6px; font-weight: 300; opacity: 0.9; }
 
-/* 2. 菜单卡片样式 */
+/* 2. 菜单卡片 - 增强玻璃边缘与光感 */
 .menu-section { max-width: 900px; margin: 0 auto 80px auto; }
 .section-title {
     font-size: 28px; color: #fdfcfb; font-weight: 700; text-align: left;
@@ -26,12 +26,15 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 
 .menu-card {
     display: flex; flex-direction: column; align-items: center;
-    background: rgba(45, 35, 25, 0.25); 
-    backdrop-filter: blur(10px) saturate(160%); 
-    -webkit-backdrop-filter: blur(10px) saturate(160%);
+    background: rgba(255, 255, 255, 0.03); /* 降低底色饱和度，强调模糊感 */
+    backdrop-filter: blur(15px) saturate(160%); 
+    -webkit-backdrop-filter: blur(15px) saturate(160%);
     margin: 40px auto; padding: 35px; border-radius: 35px; max-width: 500px;
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    /* 玻璃边缘高亮 + 双重阴影 */
+    border: 1px solid rgba(255, 255, 255, 0.15); 
+    box-shadow: 
+        0 20px 50px rgba(0,0,0,0.5),
+        inset 0 0 15px rgba(255, 255, 255, 0.05);
     animation: fadeInUp 0.8s ease backwards;
 }
 
@@ -48,61 +51,45 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin-bottom: 15px; 
 }
 
-/* 3. 按钮样式修复 - 解决文字过长 & 发光粘滞 */
+/* 3. 按钮样式 - 增强物理光泽与反馈 */
 .menu-card button, #order-now-btn, .checkout-btn {
-    background: #c5a059;
-    color: #1a130f; 
-    border: none !important;
-    padding: 12px 20px; /* 略微缩小左右内边距防止文字顶边 */
-    border-radius: 20px; 
-    font-size: 16px;
-    font-weight: 700; 
-    cursor: pointer; 
-    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: linear-gradient(145deg, #d4b475, #c5a059); /* 渐变增加立体感 */
+    color: #1a130f; border: none !important;
+    padding: 12px 20px; border-radius: 20px; font-size: 16px;
+    font-weight: 700; cursor: pointer; 
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     
-    /* 解决文字过长：允许自动换行并保持居中 */
     min-width: 120px;
     max-width: 90%; 
     line-height: 1.2;
     word-wrap: break-word;
-    
-    /* 关键：清除移动端默认点击高亮 */
     -webkit-tap-highlight-color: transparent;
     outline: none;
 }
 
-/* 仅在【支持鼠标悬停】的设备（电脑）上显示 Hover */
 @media (hover: hover) {
     .menu-card button:hover, #order-now-btn:hover, .checkout-btn:hover {
-        background: #d4b475; 
-        filter: brightness(1.2); 
+        filter: brightness(1.15); 
         transform: scale(1.03); 
         box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
     }
 }
 
-/* 手机端点击瞬间：按下即亮，松开即灭 */
 .menu-card button:active, #order-now-btn:active, .checkout-btn:active {
-    background: #e6c88a !important; /* 强制按下时变亮 */
-    transform: scale(0.94) !important; /* 明显的下压感 */
+    background: #e6c88a !important; 
+    transform: scale(0.94) !important; 
     filter: brightness(1.3);
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    transition: 0s; /* 瞬间反馈，不拖泥带水 */
+    transition: 0s; 
 }
 
-/* 4. 底部 Tray & 抽屉 */
+/* 4. 底部 Tray & 抽屉 - 增强模糊度 */
 .cart-container {
-    position: fixed;
-    bottom: -350px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 92%;
-    max-width: 500px;
-    z-index: 2000;
-    transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    display: flex !important;
-    flex-direction: column !important;
+    position: fixed; bottom: -350px; left: 50%;
+    transform: translateX(-50%); width: 92%; max-width: 500px;
+    z-index: 2000; transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex !important; flex-direction: column !important;
     justify-content: flex-end;
 }
 
@@ -110,51 +97,45 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 
 .cart-bar {
     background: rgba(30, 25, 20, 0.65); 
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    backdrop-filter: blur(15px) saturate(180%);
+    -webkit-backdrop-filter: blur(15px) saturate(180%);
     padding: 12px 18px; border-radius: 28px;
     display: flex !important; flex-direction: row !important;
     justify-content: space-between !important; align-items: center !important;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     box-shadow: 0 15px 45px rgba(0,0,0,0.6);
-    cursor: pointer; position: relative; z-index: 5; height: 72px;
     box-sizing: border-box;
 }
 
-.modal-content {
-    background: rgba(25, 20, 15, 0.85); 
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #e2d1c3; border-radius: 30px 30px 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.1); border-bottom: none;
-    padding: 25px; margin-bottom: -25px;
-    max-height: 0; opacity: 0; overflow: hidden;
-    transform: translateY(20px); transition: all 0.5s ease;
-}
-
-.modal-active .modal-content {
-    max-height: 500px; opacity: 1; transform: translateY(0);
-    margin-bottom: -5px; padding-bottom: 45px;
-}
-
-/* 5. Toast 彻底隐藏修复 */
+/* 5. Toast 极致修复：高模糊玻璃感 + 智能文字截断 */
 .toast-hidden {
     position: fixed;
-    top: -150px; /* 进一步增加隐藏深度 */
+    top: -160px; /* 增加深度防止露出 */
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(197, 160, 89, 0.95); 
-    backdrop-filter: blur(10px) saturate(140%); 
-    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    background: rgba(197, 160, 89, 0.88); 
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
     color: #1a130f;
-    padding: 14px 35px;
-    border-radius: 30px;
+    padding: 12px 25px;
+    border-radius: 25px;
     font-weight: 700;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
-    border: 1px solid rgba(255,255,255,0.25);
+    font-size: 14px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+    border: 1px solid rgba(255,255,255,0.3);
     transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 3000;
+
+    /* 限制文字宽度与行数 */
+    max-width: 260px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* 强制最多两行 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+    line-height: 1.4;
 }
+
 .toast-show { top: 45px; }
 
 /* 响应式微调 */
