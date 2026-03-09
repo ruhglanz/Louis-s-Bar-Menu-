@@ -335,7 +335,6 @@ h2 {
     border-radius: 16px !important;
 }
 
-
 /* =========================================
    7. 提示弹窗
    ========================================= */
@@ -418,6 +417,7 @@ h2 {
     #order-now-btn {
         padding: 6px 12px !important;
         font-size: 12px !important;
+        border-radius: 12px !important;
     }
 }
 
