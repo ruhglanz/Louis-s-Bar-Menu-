@@ -173,7 +173,7 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签（彻底修复手机横向滑动 + 最后一个 tab 不被截断）
+   5. 分类标签（终极修复：手机横向滑动 + 最后一个 tab 完整显示）
    ========================================= */
 .category-tabs {
     display: flex;
@@ -189,14 +189,17 @@ h2 {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    /* 关键修复：左右 padding 改为 12px，给最后一个 tab 留出足够空间 */
-    padding: 10px 12px;
+    /* 终极修复：左右 padding 改为 0，给最后一个 tab 留出最大空间 */
+    padding: 10px 0;
     margin: 0 auto 30px auto;
     /* 左对齐，让滚动自然 */
     justify-content: flex-start;
     /* 隐藏滚动条 */
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /* 新增：给 tab 栏左右加 16px 的外边距，替代 padding */
+    margin-left: 16px;
+    margin-right: 16px;
 }
 .category-tabs::-webkit-scrollbar {
     display: none;
@@ -237,7 +240,7 @@ h2 {
 }
 
 /* =========================================
-   6. 购物车底部栏（修复位置和动画流畅度）
+   6. 购物车底部栏（恢复流畅动画）
    ========================================= */
 .cart-container {
     position: fixed; 
@@ -323,6 +326,7 @@ h2 {
     border-radius: 0 0 28px 28px !important; 
     margin-top: -1px; 
 }
+
 
 /* =========================================
    7. 提示弹窗
