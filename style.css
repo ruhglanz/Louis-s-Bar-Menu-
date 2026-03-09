@@ -173,7 +173,7 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签（修复手机横向滑动）
+   5. 分类标签（修复手机横向滑动 + 最后一个 tab 不被截断）
    ========================================= */
 .category-tabs {
     display: flex;
@@ -181,18 +181,20 @@ h2 {
     /* 核心：允许横向滚动 + 隐藏滚动条 */
     overflow-x: auto;
     overflow-y: hidden;
-    /* 必须加：iOS 原生顺滑滚动 */
+    /* iOS 原生顺滑滚动 */
     -webkit-overflow-scrolling: touch;
-    /* 必须加：允许横向触摸，不被全局禁止 */
+    /* 允许横向触摸，不被全局禁止 */
     touch-action: pan-x;
-    /* 修复：flex 容器宽度撑满，不被内部挤压 */
+    /* 容器宽度 100%，不被挤压 */
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    padding: 10px 20px;
+    /* 关键修复：左右 padding 改为 16px，给最后一个 tab 留出空间 */
+    padding: 10px 16px;
     margin: 0 auto 30px auto;
-    /* 修复：去掉居中，让滚动自然 */
+    /* 左对齐，让滚动自然 */
     justify-content: flex-start;
+    /* 隐藏滚动条 */
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -213,7 +215,7 @@ h2 {
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    /* 修复：按钮不被压缩 */
+    /* 按钮不被压缩 */
     flex-shrink: 0;
 }
 
@@ -233,6 +235,7 @@ h2 {
 .tab-btn:active {
     transform: scale(0.95);
 }
+
 
 /* =========================================
    6. 购物车底部栏
