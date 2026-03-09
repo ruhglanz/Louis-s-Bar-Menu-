@@ -116,3 +116,32 @@ document.addEventListener('mousemove', (e) => {
     const y = e.clientY / window.innerHeight;
     document.body.style.backgroundPosition = `${x * 20}px ${y * 20}px`;
 });
+
+// =========================================
+// 菜单过滤功能 (精准过滤版)
+// =========================================
+function filterMenu(category, event) {
+    const tabs = document.querySelectorAll('.tab-btn');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    event.target.classList.add('active');
+
+    const cards = document.querySelectorAll('.menu-card');
+    let delay = 0; 
+    
+    cards.forEach(card => {
+        // 将 data-category 按空格拆分成数组，实现精准匹配
+        const itemCategories = card.getAttribute('data-category').split(' ');
+        
+        if (category === 'all' || itemCategories.includes(category)) {
+            card.classList.remove('hide-card');
+            
+            card.style.animation = 'none';
+            card.offsetHeight; // 强制重绘
+            card.style.animation = `fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) ${delay}s forwards`;
+            
+            delay += 0.1; 
+        } else {
+            card.classList.add('hide-card');
+        }
+    });
+}
