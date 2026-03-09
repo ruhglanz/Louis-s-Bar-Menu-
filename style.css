@@ -186,6 +186,31 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
    8. 响应式与动画
    ========================================= */
 @media (max-width: 600px) {
+    #menu-items-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 5px;
+    }
+    .menu-card {
+        padding: 20px 15px;
+        border-radius: 25px;
+    }
+    .menu-img {
+        height: 180px;
+        border-radius: 15px;
+        margin: 10px 0;
+    }
+    .dish-name {
+        font-size: 16px;
+    }
+    .price-tag {
+        font-size: 16px;
+    }
+    .menu-card button {
+        padding: 8px 16px;
+        font-size: 13px;
+        border-radius: 15px;
+    }
     .category-tabs { justify-content: flex-start; } /* 窄屏时允许滑动 */
     .toast-hidden { white-space: normal; text-align: center; padding: 12px 20px; }
 }
