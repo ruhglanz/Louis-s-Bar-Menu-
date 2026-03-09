@@ -53,6 +53,8 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     position: relative; 
     transition: opacity 0.4s ease, transform 0.4s ease;
+    /* 新增：强制所有卡片高度一致 */
+    height: 100%;
 }
 
 .menu-img {
@@ -63,6 +65,8 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     border-radius: 25px; 
     margin: 15px 0; 
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    /* 新增：确保图片在卡片内位置一致 */
+    flex-shrink: 0;
 }
 
 .dish-name {
@@ -72,6 +76,11 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin: 5px 0; 
     line-height: 1.4; 
     letter-spacing: -0.01em;
+    /* 新增：固定文字高度，避免换行导致卡片高度不一致 */
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .price-tag { 
@@ -95,6 +104,8 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     cursor: pointer; 
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2);
+    /* 新增：按钮固定在卡片底部 */
+    margin-top: auto;
 }
 
 .menu-card button:active, #order-now-btn:active { 
@@ -275,7 +286,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 .toast-show { top: 40px; }
 
 /* =========================================
-   8. 响应式终极修复 (手机强制两列)
+   8. 响应式终极修复 (手机强制两列 + 完美对齐)
    ========================================= */
 /* 手机端（768px以下）强制两列，优先级最高 */
 @media screen and (max-width: 768px) {
@@ -284,19 +295,30 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
         gap: 12px !important;
         padding: 0 6px !important;
         max-width: 100% !important;
+        /* 新增：确保网格行高一致 */
+        grid-auto-rows: 1fr;
     }
     .menu-card {
         padding: 18px 10px !important;
         border-radius: 20px !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
     }
     .menu-img {
         height: 150px !important;
         border-radius: 12px !important;
         margin: 8px 0 !important;
+        flex-shrink: 0 !important;
     }
     .dish-name {
         font-size: 14px !important;
         margin: 3px 0 !important;
+        min-height: 2.6em !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
     }
     .price-tag {
         font-size: 15px !important;
@@ -306,6 +328,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
         padding: 7px 12px !important;
         font-size: 12px !important;
         border-radius: 12px !important;
+        margin-top: auto !important;
     }
     .category-tabs {
         justify-content: flex-start !important;
@@ -323,6 +346,13 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     #menu-items-container {
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
         gap: 25px !important;
+        grid-auto-rows: auto;
+    }
+    .menu-card {
+        height: auto;
+    }
+    .dish-name {
+        min-height: auto;
     }
 }
 
