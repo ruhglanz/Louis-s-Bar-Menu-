@@ -137,3 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// 最强防右键保存
+document.addEventListener('contextmenu', event => {
+    event.preventDefault();
+});
