@@ -1,143 +1,115 @@
+/* 1. 基础背景 */
 body {
-    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0), #fff),
-                radial-gradient(farthest-side at bottom left, #e992d3, rgba(255,255,255,0.5));
-    
+    background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
     background-size: 110% 110%; 
-    transition: background-position 0.2s ease-out; 
-
     background-attachment: fixed;
     min-height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
     text-align: center;
-    padding: 60px 30px;
+    padding: 60px 20px 140px 20px;
+    margin: 0;
+    color: #e2d1c3;
+    overflow-x: hidden;
+    transition: background-position 0.2s ease-out;
 }
 
-h1 {
-    color: #1a1a2e;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    font-weight: 800;
-    letter-spacing: -1px; 
-}
+h1 { color: #fdfcfb; text-shadow: 0 4px 20px rgba(0,0,0,0.5); font-weight: 800; }
+h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing: 6px; font-weight: 300; opacity: 0.9; }
 
-h2 {
-    color: #1c1c1e;       
-    font-size: 24px;         
-    margin-top: 10px;        
-    margin-bottom: 50px;     
-    text-transform: uppercase; 
-    letter-spacing: 6px;     
-    font-weight: 300;        
-    opacity: 0.6;            
-    
-    animation: fadeInDown 1s ease-out;
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 0.6;
-        transform: translateY(0);
-    }
-}
-
-p {
-    font-size: 24px; 
-    margin: 25px 0;
-    font-weight: 500;
+/* 2. 菜单卡片样式 */
+.menu-section { max-width: 900px; margin: 0 auto 80px auto; }
+.section-title {
+    font-size: 28px; color: #fdfcfb; font-weight: 700; text-align: left;
+    margin-left: 5%; margin-bottom: 25px; padding-bottom: 12px;
+    border-bottom: 1.5px solid rgba(197, 160, 89, 0.3);
 }
 
 .menu-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    margin: 40px auto;
-    padding: 30px;
-    border-radius: 30px;
-    max-width: 500px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: fadeInUp 0.8s ease backwards; 
-    
-}
-
-.menu-card:nth-child(1) { animation-delay: 0.1s; }
-.menu-card:nth-child(2) { animation-delay: 0.2s; }
-.menu-card:nth-child(3) { animation-delay: 0.3s; }
-
-button {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    padding: 15px 40px;
-    border-radius: 20px;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-button:hover {
-    transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.5);
-}
-
-button:active {
-    transform: scale(0.92); 
-}
-
-.toast-hidden {
-    position: fixed;
-    top: -120px; 
-    left: 50%;
-    transform: translateX(-50%) scale(0.9); 
-    
-    background: rgba(255, 255, 255, 0.3); 
-    backdrop-filter: blur(25px) saturate(180%);
-    -webkit-backdrop-filter: blur(25px) saturate(180%);
-    
-    color: #1c1c1e;
-    padding: 18px 36px;
-    border-radius: 50px;
-    
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    
-    font-weight: 600;
-    font-size: 16px;
-    
-    transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-    z-index: 1000;
-    
-    pointer-events: none;
-}
-
-.toast-show {
-    top: 50px; 
-    transform: translateX(-50%) scale(1); 
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(30, 20, 15, 0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    margin: 40px auto; padding: 35px; border-radius: 35px; max-width: 500px;
+    border: 1px solid rgba(197, 160, 89, 0.15); box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    animation: fadeInUp 0.8s ease backwards;
 }
 
 .menu-img {
-    width: 100%;           
-    max-width: 350px;     
-    height: 350px;         
-    object-fit: cover;    
-    border-radius: 20px;   
-    margin: 20px 0;       
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
-    display: block;
-    transition: transform 0.5s ease; 
+    width: 100%; max-width: 380px; height: 380px; object-fit: cover;
+    border-radius: 25px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.menu-card:hover .menu-img { transform: scale(1.04); }
+
+.price-tag { font-size: 22px; color: #c5a059; font-weight: 700; margin-bottom: 15px; }
+
+/* 3. 按钮样式 - 纯色无边框 */
+.menu-card button, #order-now-btn, .checkout-btn {
+    background: #c5a059; color: #1a130f; border: none !important;
+    padding: 12px 25px; border-radius: 20px; font-size: 16px;
+    font-weight: 700; cursor: pointer; transition: all 0.3s ease;
 }
 
-.menu-card:hover .menu-img {
-    transform: scale(1.03); 
+/* 4. 重点：抽屉式购物车交互布局 */
+.cart-container {
+    position: fixed;
+    bottom: -250px; /* 初始完全隐藏 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 500px;
+    z-index: 2000;
+    transition: bottom 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end;
 }
+
+/* 显示容器 */
+.cart-container-show { bottom: 30px !important; }
+
+/* 底部 Tray 条 */
+.cart-bar {
+    background: rgba(15, 10, 5, 0.98);
+    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    padding: 12px 20px; border-radius: 25px;
+    display: flex !important; flex-direction: row !important;
+    justify-content: space-between !important; align-items: center !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    cursor: pointer; position: relative; z-index: 5; height: 65px;
+}
+
+/* 抽屉内容 */
+.modal-content {
+    background: #1a130f; color: #e2d1c3; border-radius: 25px 25px 0 0;
+    border: 1px solid rgba(197, 160, 89, 0.2); border-bottom: none;
+    padding: 20px; margin-bottom: -20px;
+    max-height: 0; opacity: 0; overflow: hidden;
+    transform: translateY(20px); transition: all 0.4s ease;
+}
+
+/* 激活抽屉 */
+.modal-active .modal-content {
+    max-height: 450px; opacity: 1; transform: translateY(0);
+    margin-bottom: -5px; padding-bottom: 35px;
+}
+
+/* 5. 内部元素细节 */
+.cart-info { font-size: 14px; white-space: nowrap; }
+.tap-hint { font-size: 11px; opacity: 0.5; margin: 0 5px; white-space: nowrap; }
+#cart-count { background: #c5a059; color: #1a1a2e; padding: 2px 8px; border-radius: 10px; font-weight: 800; }
+
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
+.qty-btn {
+    background-color: #c5a059 !important; color: #1a130f !important;
+    border: none !important; width: 28px; height: 28px; border-radius: 50%;
+    display: inline-flex; justify-content: center; align-items: center; cursor: pointer;
+}
+
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.close-btn { background: none; border: none; color: #c5a059; font-size: 20px; cursor: pointer; }
+
+/* 提示框 */
+.toast-hidden { position: fixed; top: -50px; left: 50%; transform: translateX(-50%); background: #c5a059; color: #1a130f; padding: 10px 25px; border-radius: 20px; font-weight: bold; transition: top 0.4s; z-index: 3000; }
+.toast-show { top: 30px; }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
