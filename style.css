@@ -240,7 +240,7 @@ h2 {
 }
 
 /* =========================================
-   6. 购物车底部栏（恢复流畅动画）
+   6. 购物车底部栏（修复圆角流畅度 + Order Now 按钮尺寸）
    ========================================= */
 .cart-container {
     position: fixed; 
@@ -250,7 +250,6 @@ h2 {
     width: 95%;
     max-width: 500px; 
     z-index: 2000;
-    /* 恢复流畅动画曲线 */
     transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     pointer-events: none;
     display: flex; 
@@ -262,6 +261,7 @@ h2 {
 .modal-content {
     background: rgba(20, 15, 12, 0.98); 
     backdrop-filter: blur(25px) saturate(150%);
+    /* 修复：统一圆角为 30px，确保打开/关闭时流畅过渡 */
     border-radius: 30px 30px 0 0; 
     border: 1px solid rgba(255, 255, 255, 0.15); 
     border-bottom: none;
@@ -271,7 +271,6 @@ h2 {
     padding: 0 25px; 
     overflow: hidden;
     transform: translateY(20px); 
-    /* 恢复流畅动画曲线 */
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
     width: 100%; 
     box-sizing: border-box; 
@@ -309,6 +308,7 @@ h2 {
     background: rgba(30, 25, 20, 0.95); 
     backdrop-filter: blur(25px) saturate(180%);
     padding: 14px 22px; 
+    /* 修复：统一圆角为 28px，与弹窗底部圆角匹配 */
     border-radius: 28px; 
     display: flex !important; 
     justify-content: space-between !important; 
@@ -322,9 +322,17 @@ h2 {
     box-sizing: border-box;
 }
 
+/* 修复：弹窗打开时，底部栏的圆角变为 0，与弹窗无缝衔接 */
 .modal-active .cart-bar { 
     border-radius: 0 0 28px 28px !important; 
     margin-top: -1px; 
+}
+
+/* 修复：Order Now 按钮尺寸，与整体风格统一 */
+#order-now-btn {
+    padding: 8px 20px !important;
+    font-size: 14px !important;
+    border-radius: 16px !important;
 }
 
 
