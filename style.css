@@ -1,10 +1,9 @@
 /* =========================================
-   1. 基础背景与整体氛围 (极致暗黑 + 兼容降级)
+   1. 基础背景与整体氛围 (极致暗黑 + Safari 兼容)
    ========================================= */
 body {
-    /* 主背景：深色渐变，兼容所有浏览器 */
-    background: #0a0806;
-    background: linear-gradient(to bottom, #2c1e14, #0a0806);
+    background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
+    background-size: cover;
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
     text-align: center;
@@ -46,19 +45,16 @@ h2 {
 }
 
 /* =========================================
-   3. 菜单卡片 (玻璃拟态 + 降级方案)
+   3. 菜单卡片 (玻璃拟态)
    ========================================= */
 .menu-card {
     display: flex; 
     flex-direction: column; 
     align-items: center; 
     justify-content: space-between;
-    /* 主玻璃效果：Safari/Chrome 生效 */
     background: rgba(255, 255, 255, 0.04); 
     backdrop-filter: blur(16px) saturate(180%); 
     -webkit-backdrop-filter: blur(16px) saturate(180%);
-    /* 降级方案：App 内置浏览器生效 */
-    background: #1a1714;
     padding: 30px 25px; 
     border-radius: 35px; 
     width: 100%; 
@@ -91,10 +87,6 @@ h2 {
     transition: opacity 0.5s ease;
     background: rgba(255,255,255,0.05);
     opacity: 0;
-    /* 防保存核心 */
-    pointer-events: none;
-    user-select: none;
-    -webkit-user-select: none;
 }
 
 .menu-img.loaded {
@@ -160,7 +152,7 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签 (降级方案)
+   5. 分类标签
    ========================================= */
 .category-tabs {
     display: flex; 
@@ -177,12 +169,7 @@ h2 {
 .category-tabs::-webkit-scrollbar { display: none; }
 
 .tab-btn {
-    /* 主玻璃效果 */
     background: rgba(255, 255, 255, 0.08); 
-    backdrop-filter: blur(20px) saturate(180%); 
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    /* 降级方案 */
-    background: #2a2724;
     color: #e2d1c3; 
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 9px 20px; 
@@ -191,11 +178,15 @@ h2 {
     font-weight: 600; 
     cursor: pointer;
     white-space: nowrap; 
+    backdrop-filter: blur(20px) saturate(180%); 
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tab-btn.active {
-    background: rgba(197, 160, 89,9;
+    background: rgba(197, 160, 89, 0.35); 
+    color: #fdfcfb; 
+    border: 1px solid #c5a059;
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
 }
 
@@ -204,7 +195,7 @@ h2 {
 }
 
 /* =========================================
-   6. 购物车底部栏 (降级方案)
+   6. 购物车底部栏
    ========================================= */
 .cart-container {
     position: fixed; 
@@ -223,11 +214,8 @@ h2 {
 .cart-container-show { bottom: 30px !important; }
 
 .modal-content {
-    /* 主玻璃效果 */
     background: rgba(20, 15, 12, 0.98); 
     backdrop-filter: blur(25px) saturate(150%);
-    /* 降级方案 */
-    background: #140f0c;
     border-radius: 30px 30px 0 0; 
     border: 1px solid rgba(255, 255, 255, 0.15); 
     border-bottom: none;
@@ -247,7 +235,7 @@ h2 {
     visibility: visible; 
     transform: translateY(0); 
     max-height: 600px; 
-    padding: 30px 25px 25px; 
+    padding: 30px 25px 25px 25px; 
     pointer-events: auto;
 }
 
@@ -271,11 +259,8 @@ h2 {
 }
 
 .cart-bar {
-    /* 主玻璃效果 */
     background: rgba(30, 25, 20, 0.95); 
     backdrop-filter: blur(25px) saturate(180%);
-    /* 降级方案 */
-    background: #1e1914;
     padding: 14px 22px; 
     border-radius: 28px; 
     display: flex !important; 
@@ -296,19 +281,16 @@ h2 {
 }
 
 /* =========================================
-   7. 提示弹窗 (降级方案)
+   7. 提示弹窗
    ========================================= */
 .toast-hidden {
     position: fixed; 
     top: -180px; 
     left: 50%; 
     transform: translateX(-50%);
-    /* 主玻璃效果 */
     background: rgba(197, 160, 89, 0.75); 
     backdrop-filter: blur(25px) saturate(200%); 
     -webkit-backdrop-filter: blur(25px) saturate(200%);
-    /* 降级方案 */
-    background: #c5a059;
     color: #1a130f; 
     padding: 14px 30px; 
     border-radius: 28px;
@@ -384,22 +366,7 @@ h2 {
 }
 
 /* =========================================
-   10. 全局防复制防保存（最强）
-   ========================================= */
-img {
-    pointer-events: none !important;
-    user-select: none !important;
-    -webkit-user-select: none !important;
-    -webkit-touch-callout: none !important;
-}
-
-* {
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-/* =========================================
-   11. 动画
+   10. 动画
    ========================================= */
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(30px); } 
