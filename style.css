@@ -32,7 +32,7 @@ h2 {
 }
 
 /* =========================================
-   2. 菜单网格布局 (分端严格控制 + 手机间距优化)
+   2. 菜单网格布局
    ========================================= */
 #menu-items-container {
     display: grid;
@@ -45,7 +45,7 @@ h2 {
 }
 
 /* =========================================
-   3. 菜单卡片 (玻璃拟态 + 完美对齐 + 图片加载优化)
+   3. 菜单卡片 (玻璃拟态)
    ========================================= */
 .menu-card {
     display: flex; 
@@ -60,7 +60,7 @@ h2 {
     width: 100%; 
     box-sizing: border-box; 
     border: 1px solid rgba(255, 255, 255, 0.12); 
-    box-shadow: 0 25px 50px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 255, 255, 0.05);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6), inset 0 0 15px rgba(255,255,255,0.05);
     opacity: 0; 
     transform: translateY(30px);
     animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -69,14 +69,12 @@ h2 {
     height: 100%;
 }
 
-/* 卡片悬停效果 */
 .menu-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(255, 255, 255, 0.08);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.7), inset 0 0 20px rgba(255,255,255,0.08);
     border-color: rgba(197, 160, 89, 0.3);
 }
 
-/* 图片加载样式 (核心优化) */
 .menu-img {
     width: 100%; 
     max-width: 380px; 
@@ -87,13 +85,10 @@ h2 {
     box-shadow: 0 15px 35px rgba(0,0,0,0.5);
     flex-shrink: 0;
     transition: opacity 0.5s ease;
-    /* 占位背景 */
     background: rgba(255,255,255,0.05);
-    /* 初始隐藏 */
     opacity: 0;
 }
 
-/* 图片加载完成后显示 */
 .menu-img.loaded {
     opacity: 1;
 }
@@ -113,7 +108,7 @@ h2 {
 }
 
 /* =========================================
-   4. 核心按钮与 Qty 按钮 (主题色 + 微交互 + 文字平滑)
+   4. 按钮
    ========================================= */
 .menu-card button, #order-now-btn, .checkout-btn, .confirm-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
@@ -127,18 +122,16 @@ h2 {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2);
     margin-top: auto;
-    /* 文字抗锯齿 */
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
-.menu-card button:hover, #order-now-btn:hover, .checkout-btn:hover {
+.menu-card button:hover, #order-now-btn:hover {
     background: linear-gradient(135deg, #e6c588 0%, #d4b475 100%);
     box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
     transform: translateY(-2px);
 }
 
-.menu-card button:active, #order-now-btn:active { 
+.menu-card button:active { 
     transform: scale(0.95) translateY(-2px);
     opacity: 0.9; 
 }
@@ -159,7 +152,7 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签栏 (玻璃质感 + 点击反馈)
+   5. 分类标签
    ========================================= */
 .category-tabs {
     display: flex; 
@@ -188,10 +181,8 @@ h2 {
     backdrop-filter: blur(20px) saturate(180%); 
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-font-smoothing: antialiased;
 }
 
-/* 标签选中态 */
 .tab-btn.active {
     background: rgba(197, 160, 89, 0.35); 
     color: #fdfcfb; 
@@ -199,19 +190,12 @@ h2 {
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
 }
 
-/* 标签点击态 */
 .tab-btn:active {
     transform: scale(0.95);
-    background: rgba(197, 160, 89, 0.2);
-}
-
-.tab-btn:not(.active):hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* =========================================
-   6. 底部 Tray (宽度对齐 + 手机端缩小)
+   6. 购物车底部栏
    ========================================= */
 .cart-container {
     position: fixed; 
@@ -242,7 +226,6 @@ h2 {
     overflow: hidden;
     transform: translateY(20px); 
     transition: all 0.4s ease; 
-    position: relative;
     width: 100%; 
     box-sizing: border-box; 
 }
@@ -268,8 +251,7 @@ h2 {
     display: flex; 
     align-items: center; 
     justify-content: center;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s;
-    z-index: 100;
+    transition: transform 0.4s, color 0.3s;
 }
 .close-tray:hover { 
     color: #c5a059; 
@@ -291,17 +273,15 @@ h2 {
     pointer-events: auto;
     width: 100%; 
     box-sizing: border-box;
-    transition: border-radius 0.3s ease;
 }
 
 .modal-active .cart-bar { 
     border-radius: 0 0 28px 28px !important; 
     margin-top: -1px; 
-    border-top: 1px solid rgba(255, 255, 255, 0.05); 
 }
 
 /* =========================================
-   7. Toast 通知 (冰感玻璃 + 换行修复)
+   7. 提示弹窗
    ========================================= */
 .toast-hidden {
     position: fixed; 
@@ -325,12 +305,11 @@ h2 {
     white-space: nowrap; 
     overflow: hidden; 
     text-overflow: ellipsis;
-    -webkit-font-smoothing: antialiased;
 }
 .toast-show { top: 40px; }
 
 /* =========================================
-   8. 空购物车样式 (新增)
+   8. 空购物车
    ========================================= */
 .empty-cart {
     display: flex;
@@ -339,7 +318,6 @@ h2 {
     padding: 40px 0;
     opacity: 0.7;
     gap: 15px;
-    -webkit-font-smoothing: antialiased;
 }
 
 .empty-cart i {
@@ -348,13 +326,13 @@ h2 {
 }
 
 /* =========================================
-   9. 响应式终极修复 (手机强制两列 + 完美适配)
+   9. 手机端适配
    ========================================= */
 @media screen and (max-width: 768px) {
     #menu-items-container {
         grid-template-columns: 1fr 1fr !important;
-        gap: 16px !important; /* 优化间距，避免拥挤 */
-        padding: 0 12px !important; /* 左右留边，避免贴屏 */
+        gap: 16px !important;
+        padding: 0 12px !important;
         max-width: 100% !important;
         grid-auto-rows: 1fr;
     }
@@ -362,99 +340,39 @@ h2 {
         padding: 18px 10px !important;
         border-radius: 20px !important;
         height: 100% !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
     }
     .menu-img {
         height: 150px !important;
         border-radius: 12px !important;
         margin: 8px 0 !important;
-        flex-shrink: 0 !important;
     }
     .dish-name {
         font-size: 14px !important;
-        margin: 3px 0 !important;
         min-height: 2.6em !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
     }
     .menu-card button {
         padding: 7px 12px !important;
         font-size: 12px !important;
         border-radius: 12px !important;
-        margin-top: auto !important;
     }
-    .category-tabs {
-        justify-content: flex-start !important;
-        padding: 10px 12px !important;
-    }
-    .toast-hidden {
-        white-space: normal !important;
-        text-align: center !important;
-        padding: 12px 18px !important;
-    }
-
-    /* 手机底部栏变小 */
     .cart-bar {
         padding: 10px 16px !important;
         border-radius: 20px !important;
-    }
-    .tap-hint {
-        font-size: 11px !important;
-        margin: 0 !important;
-        -webkit-font-smoothing: antialiased;
     }
     #order-now-btn {
         padding: 6px 12px !important;
         font-size: 12px !important;
     }
-    .cart-info {
-        font-size: 13px !important;
-        -webkit-font-smoothing: antialiased;
-    }
-}
-
-@media screen and (min-width: 769px) {
-    #menu-items-container {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
-        gap: 25px !important;
-        grid-auto-rows: auto;
-    }
-    .menu-card {
-        height: auto;
-    }
-    .dish-name {
-        min-height: auto;
-    }
 }
 
 /* =========================================
-   10. 其他样式 & 入场动画优化
+   10. 动画
    ========================================= */
-.badge {
-    position: absolute; 
-    top: -10px; 
-    right: -10px; 
-    background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
-    color: #1a130f; 
-    padding: 5px 12px; 
-    border-radius: 12px;
-    font-size: 12px; 
-    font-weight: 800; 
-    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
-    z-index: 10; 
-    transform: rotate(5deg);
-    -webkit-font-smoothing: antialiased;
-}
-
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(30px); } 
     to { opacity: 1; transform: translateY(0); } 
 }
 
-/* 交错入场动画 */
 .menu-card:nth-child(2n+1) { animation-delay: 0.1s; }
 .menu-card:nth-child(2n) { animation-delay: 0.2s; }
 
