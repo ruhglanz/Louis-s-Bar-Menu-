@@ -1,152 +1,251 @@
 /* =========================================
-   1. 基础背景与整体氛围
+   1. 基础背景
    ========================================= */
+
 body {
+
     background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
     background-size: 110% 110%;
     background-attachment: fixed;
+
     min-height: 100vh;
+
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+
     text-align: center;
+
     padding: 60px 20px 140px 20px;
+
     margin: 0;
+
     color: #e2d1c3;
+
     overflow-x: hidden;
+
 }
 
 h1 {
+
     color: #fdfcfb;
+
     text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+
     font-weight: 800;
+
     margin-bottom: 5px;
+
 }
 
 h2 {
+
     color: #c5a059;
+
     font-size: 24px;
+
     text-transform: uppercase;
+
     letter-spacing: 6px;
+
     font-weight: 300;
+
     opacity: 0.9;
+
     margin-top: 0;
+
 }
 
 /* =========================================
-   2. 菜单网格布局
+   2. 菜单网格
    ========================================= */
+
 #menu-items-container {
+
     display: grid;
+
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
     gap: 25px;
+
     max-width: 1050px;
+
     margin: 0 auto 80px auto;
+
     padding: 0 10px;
+
 }
 
 /* =========================================
    3. 菜单卡片
    ========================================= */
+
 .menu-card {
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
-    justify-content: space-between;
+
+    justify-content: flex-start;
 
     background: rgba(255,255,255,0.04);
+
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
 
-    padding: 30px 25px;
-    border-radius: 35px;
+    padding: 25px 20px;
+
+    border-radius: 32px;
 
     width: 100%;
+
     box-sizing: border-box;
 
     border: 1px solid rgba(255,255,255,0.12);
 
     box-shadow:
-        0 25px 50px rgba(0,0,0,0.6),
-        inset 0 0 15px rgba(255,255,255,0.05);
-
-    opacity: 0;
-    transform: translateY(30px);
-
-    animation: fadeInUp 0.8s cubic-bezier(0.2,0.8,0.2,1) forwards;
+    0 20px 50px rgba(0,0,0,0.6),
+    inset 0 0 15px rgba(255,255,255,0.05);
 
     position: relative;
-    transition: opacity 0.4s ease, transform 0.4s ease;
+
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+
 }
 
-/* 图片 */
-.menu-img {
-    width: 100%;
-    max-width: 380px;
-    height: 320px;
-    object-fit: cover;
+/* hover浮起效果 */
 
-    border-radius: 25px;
-    margin: 15px 0;
+.menu-card:hover {
 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-}
+    transform: translateY(-6px) scale(1.02);
 
-/* 菜名 */
-.dish-name {
-    font-size: 19px;
-    font-weight: 700;
-    color: #fdfcfb;
-    margin: 5px 0;
-    line-height: 1.4;
-}
+    box-shadow:
+    0 35px 70px rgba(0,0,0,0.7);
 
-/* 价格 */
-.price-tag {
-    font-size: 20px;
-    color: #c5a059 !important;
-    font-weight: 700;
-    margin-bottom: 12px;
 }
 
 /* =========================================
-   4. 按钮
+   4. 图片容器 (固定比例)
    ========================================= */
+
+.menu-img {
+
+    width: 100%;
+
+    aspect-ratio: 4 / 3;
+
+    object-fit: cover;
+
+    border-radius: 22px;
+
+    margin: 10px 0 14px 0;
+
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+
+}
+
+/* 图片渐变遮罩 */
+
+.menu-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    border-radius: 32px;
+
+    background:
+    linear-gradient(
+        to bottom,
+        rgba(0,0,0,0) 60%,
+        rgba(0,0,0,0.35) 100%
+    );
+
+    pointer-events: none;
+
+}
+
+/* =========================================
+   5. 菜名 & 价格
+   ========================================= */
+
+.dish-name {
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    color: #fdfcfb;
+
+    margin: 4px 0;
+
+    line-height: 1.3;
+
+}
+
+.price-tag {
+
+    font-size: 19px;
+
+    color: #c5a059 !important;
+
+    font-weight: 700;
+
+    margin-bottom: 10px;
+
+}
+
+/* =========================================
+   6. 按钮
+   ========================================= */
+
 .menu-card button,
 #order-now-btn,
 .checkout-btn,
 .confirm-btn {
 
     background: linear-gradient(135deg,#d4b475,#c5a059);
+
     color: #1a130f;
 
     border: none;
-    padding: 11px 24px;
 
-    border-radius: 20px;
+    padding: 10px 22px;
 
-    font-size: 15px;
+    border-radius: 18px;
+
+    font-size: 14px;
+
     font-weight: 700;
 
     cursor: pointer;
 
-    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    transition: all 0.25s ease;
 
     box-shadow: 0 8px 20px rgba(197,160,89,0.2);
+
 }
 
-.menu-card button:active,
-#order-now-btn:active {
+.menu-card button:active {
+
     transform: scale(0.95);
+
 }
 
 /* qty按钮 */
+
 .qty-btn {
 
     background: rgba(197,160,89,0.1) !important;
+
     color: #c5a059 !important;
 
     border: 1px solid rgba(197,160,89,0.4) !important;
 
     width: 32px;
+
     height: 32px;
 
     border-radius: 10px;
@@ -154,16 +253,21 @@ h2 {
     font-size: 18px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
 }
 
 /* =========================================
-   5. 分类 tabs
+   7. 分类tabs
    ========================================= */
+
 .category-tabs {
 
     display: flex;
+
     gap: 12px;
 
     overflow-x: auto;
@@ -171,49 +275,55 @@ h2 {
     padding: 10px 20px;
 
     margin: 0 auto 30px auto;
+
     max-width: 900px;
 
     justify-content: center;
 
     scrollbar-width: none;
+
 }
 
 .category-tabs::-webkit-scrollbar {
+
     display: none;
+
 }
 
 .tab-btn {
 
     background: rgba(255,255,255,0.08);
+
     color: #e2d1c3;
 
     border: 1px solid rgba(255,255,255,0.1);
 
-    padding: 9px 20px;
+    padding: 8px 18px;
 
-    border-radius: 20px;
+    border-radius: 18px;
 
     font-size: 14px;
+
     font-weight: 600;
 
     cursor: pointer;
 
-    white-space: nowrap;
-
-    backdrop-filter: blur(20px) saturate(180%);
 }
 
 .tab-btn.active {
 
     background: rgba(197,160,89,0.25);
+
     color: #fdfcfb;
 
     border: 1px solid rgba(197,160,89,0.5);
+
 }
 
 /* =========================================
-   6. cart tray
+   8. cart tray
    ========================================= */
+
 .cart-container {
 
     position: fixed;
@@ -221,9 +331,11 @@ h2 {
     bottom: -500px;
 
     left: 50%;
+
     transform: translateX(-50%);
 
     width: 95%;
+
     max-width: 500px;
 
     z-index: 2000;
@@ -231,12 +343,17 @@ h2 {
     transition: bottom 0.6s cubic-bezier(0.19,1,0.22,1);
 
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
+
 }
 
 .cart-container-show {
+
     bottom: 30px !important;
+
 }
 
 .cart-bar {
@@ -250,15 +367,19 @@ h2 {
     border-radius: 28px;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
     width: 100%;
+
 }
 
 /* =========================================
-   7. Toast
+   9. Toast
    ========================================= */
+
 .toast-hidden {
 
     position: fixed;
@@ -266,123 +387,95 @@ h2 {
     top: -180px;
 
     left: 50%;
+
     transform: translateX(-50%);
 
     background: rgba(197,160,89,0.75);
 
     color: #1a130f;
 
-    padding: 14px 30px;
+    padding: 14px 28px;
 
-    border-radius: 28px;
+    border-radius: 24px;
 
     font-weight: 700;
 
-    transition: top 0.6s;
+    transition: top 0.5s;
+
 }
 
 .toast-show {
+
     top: 40px;
+
 }
 
 /* =========================================
-   8. 手机优化
+   10. 手机优化
    ========================================= */
+
 @media (max-width: 600px) {
 
-    /* 两列卡片 */
-    #menu-items-container {
+#menu-items-container {
 
-        grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2,1fr);
 
-        gap: 14px;
+    gap: 12px;
 
-        padding: 0 6px;
-    }
+    padding: 0 6px;
 
-    /* 卡片更紧凑 */
-    .menu-card {
-
-        padding: 18px 12px;
-
-        border-radius: 24px;
-    }
-
-    /* 图片比例修复 */
-    .menu-img {
-
-        height: 150px;
-
-        border-radius: 16px;
-
-        margin: 8px 0;
-    }
-
-    /* 文字 */
-    .dish-name {
-
-        font-size: 15px;
-    }
-
-    .price-tag {
-
-        font-size: 16px;
-        margin-bottom: 8px;
-    }
-
-    /* 按钮 */
-    .menu-card button {
-
-        padding: 8px 14px;
-        font-size: 13px;
-    }
-
-    .category-tabs {
-
-        justify-content: flex-start;
-    }
 }
 
-/* =========================================
-   9. badge
-   ========================================= */
-.badge {
+.menu-card {
 
-    position: absolute;
+    padding: 14px 10px;
 
-    top: -10px;
-    right: -10px;
+    border-radius: 20px;
 
-    background: linear-gradient(135deg,#d4b475,#c5a059);
+}
 
-    color: #1a130f;
+.menu-img {
 
-    padding: 5px 12px;
+    aspect-ratio: 4 / 3;
 
-    border-radius: 12px;
+    border-radius: 14px;
+
+}
+
+.dish-name {
+
+    font-size: 14px;
+
+}
+
+.price-tag {
+
+    font-size: 15px;
+
+}
+
+.menu-card button {
+
+    padding: 7px 12px;
 
     font-size: 12px;
-    font-weight: 800;
 
-    box-shadow: 0 5px 15px rgba(197,160,89,0.4);
+}
+
+.category-tabs {
+
+    justify-content: flex-start;
+
+}
+
 }
 
 /* =========================================
-   10. 动画
+   动画
    ========================================= */
-@keyframes fadeInUp {
-
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 .hide-card {
+
     display: none !important;
+
 }
