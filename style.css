@@ -48,7 +48,7 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin-bottom: 15px; 
 }
 
-/* 3. 按钮样式 */
+/* 3. 按钮样式 - 增强手机端瞬时反馈 */
 .menu-card button, #order-now-btn, .checkout-btn {
     background: #c5a059;
     color: #1a130f; border: none !important;
@@ -59,13 +59,23 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     -webkit-tap-highlight-color: transparent;
 }
 
-.menu-card button:hover, .menu-card button:active,
-#order-now-btn:hover, #order-now-btn:active,
-.checkout-btn:hover, .checkout-btn:active {
+/* 仅在有鼠标的设备上启用悬停发光 */
+@media (hover: hover) {
+    .menu-card button:hover, #order-now-btn:hover, .checkout-btn:hover {
+        background: #d4b475; 
+        filter: brightness(1.2); 
+        transform: scale(1.03); 
+        box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+    }
+}
+
+/* 手机端与电脑端的点击瞬间反馈：按下变亮并轻微缩小 */
+.menu-card button:active, #order-now-btn:active, .checkout-btn:active {
     background: #d4b475; 
-    filter: brightness(1.2); 
-    transform: scale(1.03); 
-    box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+    filter: brightness(1.3); 
+    transform: scale(0.95); /* 模拟物理下压感 */
+    box-shadow: 0 2px 8px rgba(197, 160, 89, 0.6);
+    transition: all 0.05s; /* 极速反馈 */
 }
 
 /* 4. 底部 Tray & 抽屉 */
@@ -114,27 +124,26 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     margin-bottom: -5px; padding-bottom: 45px;
 }
 
-/* 5. 重点修改：Toast 毛玻璃模糊度同步为 10px */
+/* 5. Toast 修复版：彻底隐藏 + 物理回弹曲线 */
 .toast-hidden {
     position: fixed;
-    top: -80px;
+    top: -120px; /* 深埋顶部，彻底解决残留问题 */
     left: 50%;
     transform: translateX(-50%);
     background: rgba(197, 160, 89, 0.9); 
-    /* 模糊度调整为 10px，与按钮卡片风格保持高度一致 */
     backdrop-filter: blur(10px) saturate(140%); 
     -webkit-backdrop-filter: blur(10px) saturate(140%);
     color: #1a130f;
     padding: 14px 35px;
     border-radius: 30px;
     font-weight: 700;
-    /* 增加阴影深度，提升高级感 */
     box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 0 10px rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.25);
-    transition: top 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    /* 使用更具弹性的贝塞尔曲线 */
+    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     z-index: 3000;
 }
-.toast-show { top: 40px; }
+.toast-show { top: 45px; }
 
 /* 响应式微调 */
 @media (max-width: 450px) {
