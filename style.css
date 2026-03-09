@@ -1,4 +1,4 @@
-/* 1. 基础背景 */
+/* 1. 基础背景与标题 */
 body {
     background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
     background-size: 110% 110%; 
@@ -12,19 +12,18 @@ body {
     overflow-x: hidden;
 }
 
-/* 恢复 Heading 样式 */
 h1 { color: #fdfcfb; text-shadow: 0 4px 20px rgba(0,0,0,0.5); font-weight: 800; }
 h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing: 6px; font-weight: 300; opacity: 0.9; }
 
-/* 2. 菜单区 & 恢复分割线 */
+/* 2. 菜单标题与分割线 */
 .menu-section { max-width: 900px; margin: 0 auto 80px auto; }
 .section-title {
     font-size: 28px; color: #fdfcfb; font-weight: 700; text-align: left;
     margin-left: 5%; margin-bottom: 25px; padding-bottom: 12px;
-    /* 找回金色半透明分割线 */
     border-bottom: 1.5px solid rgba(197, 160, 89, 0.3);
 }
 
+/* 3. 卡片与价格修复 */
 .menu-card {
     display: flex; flex-direction: column; align-items: center;
     background: rgba(255, 255, 255, 0.04); 
@@ -41,9 +40,15 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     border-radius: 25px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
-.price-tag { font-size: 22px; color: #c5a059 !important; font-weight: 700; margin-bottom: 15px; }
+/* 价格样式修复：恢复 RM 0.01 的金色 */
+.price-tag { 
+    font-size: 22px; 
+    color: #c5a059 !important; 
+    font-weight: 700; 
+    margin-bottom: 15px; 
+}
 
-/* 3. 按钮样式 */
+/* 4. 按钮样式 */
 .menu-card button, #order-now-btn, .checkout-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
     color: #1a130f; border: none !important;
@@ -54,95 +59,66 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     outline: none;
 }
 
-@media (hover: hover) {
-    .menu-card button:hover {
-        filter: brightness(1.1); transform: scale(1.03);
-        box-shadow: 0 8px 25px rgba(197, 160, 89, 0.4);
-    }
-}
-
-.menu-card button:active { transform: scale(0.94); filter: brightness(0.9); transition: 0.05s; }
-
-/* 4. 底部 Tray 修复逻辑 (保持 visibility 隔离) */
+/* 5. 底部购物车：彻底解决重叠圆角与拼接 Bug */
 .cart-container {
     position: fixed;
-    bottom: -450px; 
+    bottom: -500px; 
     left: 50%;
     transform: translateX(-50%);
     width: 92%;
     max-width: 500px;
     z-index: 2000;
     transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    overflow: hidden; 
     pointer-events: none; 
 }
 
-.cart-container-show { 
-    bottom: 30px !important; 
-    pointer-events: auto; 
-    overflow: visible; 
-}
+.cart-container-show { bottom: 30px !important; pointer-events: auto; }
 
-.cart-bar {
-    background: rgba(30, 25, 20, 0.75); 
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    padding: 12px 18px; border-radius: 28px;
-    display: flex !important; justify-content: space-between !important; align-items: center !important;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 15px 45px rgba(0,0,0,0.6);
-    position: relative;
-    z-index: 2001;
-}
-
+/* 弹出面板：底部采用直角以便无缝拼接 */
 .modal-content {
-    background: rgba(20, 15, 10, 0.9); 
-    backdrop-filter: blur(15px);
-    border-radius: 30px 30px 0 0;
+    background: rgba(25, 20, 15, 0.98); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 30px 30px 0 0; 
+    border: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none;
+    padding: 25px; margin-bottom: 0;
+    opacity: 0; visibility: hidden;
+    transform: translateY(20px); transition: all 0.4s ease;
+}
+
+.modal-active .modal-content { opacity: 1; visibility: visible; transform: translateY(0); max-height: 550px; }
+
+/* 底部栏：通过动态圆角实现平滑切换 */
+.cart-bar {
+    background: rgba(30, 25, 20, 0.95); 
+    backdrop-filter: blur(25px) saturate(180%);
+    padding: 12px 18px; 
+    border-radius: 28px; /* 默认全圆角 */
+    display: flex !important; justify-content: space-between !important; align-items: center !important;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 25px;
-    margin-bottom: -5px;
-    opacity: 0;
-    visibility: hidden; /* 核心 Bug 修复点 */
-    transform: translateY(100px); 
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 15px 45px rgba(0,0,0,0.6);
+    position: relative; z-index: 5;
+    transition: border-radius 0.3s ease;
 }
 
-.modal-active .modal-content {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    max-height: 500px;
+/* 关键修复：当购物车展开(modal-active)时，去掉 cart-bar 的顶部圆角以融合面板 */
+.modal-active .cart-bar {
+    border-radius: 0 0 28px 28px;
+    margin-top: -1px; /* 彻底消除接缝 */
 }
 
-/* 5. Toast 修复 (保持截断逻辑) */
+/* 6. Toast 修复 - 智能截断 */
 .toast-hidden {
-    position: fixed;
-    top: -180px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(197, 160, 89, 0.92); 
-    backdrop-filter: blur(14px) saturate(150%);
-    line-clamp: 2;
-    -webkit-backdrop-filter: blur(14px) saturate(150%);
-    color: #1a130f;
-    padding: 12px 28px;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 14px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.4);
-    border: 1px solid rgba(255,255,255,0.4);
+    position: fixed; top: -180px; left: 50%; transform: translateX(-50%);
+    background: rgba(197, 160, 89, 0.92); backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #1a130f; padding: 12px 28px; border-radius: 25px;
+    font-weight: 700; font-size: 14px; z-index: 3000;
+    max-width: 250px; text-align: center;
+    display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
     transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-    z-index: 3000;
-    max-width: 250px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* 强制两行 */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.4;
-    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), inset 0 1px 2px rgba(255,255,255,0.4);
 }
-
 .toast-show { top: 40px; }
 
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
