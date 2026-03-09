@@ -173,45 +173,58 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签 (恢复 hover 效果)
+   5. 分类标签（修复手机横向滑动）
    ========================================= */
 .category-tabs {
-    display: flex; 
-    gap: 12px; 
-    overflow-x: auto; 
-    padding: 10px 20px; 
-    margin: 0 auto 30px auto; 
-    max-width: 900px; 
-    justify-content: center; 
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
+    display: flex;
+    gap: 12px;
+    /* 核心：允许横向滚动 + 隐藏滚动条 */
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* 必须加：iOS 原生顺滑滚动 */
     -webkit-overflow-scrolling: touch;
+    /* 必须加：允许横向触摸，不被全局禁止 */
+    touch-action: pan-x;
+    /* 修复：flex 容器宽度撑满，不被内部挤压 */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    margin: 0 auto 30px auto;
+    /* 修复：去掉居中，让滚动自然 */
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
-.category-tabs::-webkit-scrollbar { display: none; }
+.category-tabs::-webkit-scrollbar {
+    display: none;
+}
 
 .tab-btn {
-    background: rgba(255, 255, 255, 0.08); 
-    color: #e2d1c3; 
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2d1c3;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 9px 20px; 
-    border-radius: 20px; 
-    font-size: 14px; 
-    font-weight: 600; 
+    padding: 9px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    white-space: nowrap; 
-    backdrop-filter: blur(20px) saturate(180%); 
+    white-space: nowrap;
+    backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 修复：按钮不被压缩 */
+    flex-shrink: 0;
 }
 
 .tab-btn.active {
-    background: rgba(197, 160, 89, 0.35); 
-    color: #fdfcfb; 
+    background: rgba(197, 160, 89, 0.35);
+    color: #fdfcfb;
     border: 1px solid #c5a059;
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
 }
 
-/* 恢复标签 hover 效果 */
+/* 恢复 hover 效果 */
 .tab-btn:not(.active):hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.2);
