@@ -75,6 +75,23 @@ h2 {
     border-color: rgba(197, 160, 89, 0.3);
 }
 
+/* 恢复 Best Seller 斜角标签样式 */
+.badge {
+    position: absolute; 
+    top: -10px; 
+    right: -10px; 
+    background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
+    color: #1a130f; 
+    padding: 5px 12px; 
+    border-radius: 12px;
+    font-size: 12px; 
+    font-weight: 800; 
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+    z-index: 10; 
+    transform: rotate(5deg);
+    -webkit-font-smoothing: antialiased;
+}
+
 .menu-img {
     width: 100%; 
     max-width: 380px; 
@@ -87,6 +104,10 @@ h2 {
     transition: opacity 0.5s ease;
     background: rgba(255,255,255,0.05);
     opacity: 0;
+    /* 防保存核心 */
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .menu-img.loaded {
@@ -152,7 +173,7 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签
+   5. 分类标签 (恢复 hover 效果)
    ========================================= */
 .category-tabs {
     display: flex; 
@@ -188,6 +209,12 @@ h2 {
     color: #fdfcfb; 
     border: 1px solid #c5a059;
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
+}
+
+/* 恢复标签 hover 效果 */
+.tab-btn:not(.active):hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .tab-btn:active {
@@ -235,7 +262,7 @@ h2 {
     visibility: visible; 
     transform: translateY(0); 
     max-height: 600px; 
-    padding: 30px 25px 25px 25px; 
+    padding: 30px 25px 25px; 
     pointer-events: auto;
 }
 
@@ -366,7 +393,22 @@ h2 {
 }
 
 /* =========================================
-   10. 动画
+   10. 全局防复制防保存（最强）
+   ========================================= */
+img {
+    pointer-events: none !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -webkit-touch-callout: none !important;
+}
+
+* {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* =========================================
+   11. 动画
    ========================================= */
 @keyframes fadeInUp { 
     from { opacity: 0; transform: translateY(30px); } 
