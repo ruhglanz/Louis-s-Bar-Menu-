@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Louis's Bar</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -8,25 +10,77 @@
     <h1>Louis's Bar</h1>
     <h2>MENU</h2>
 
-    <div class="menu-card">
-        <p class="dish-name">1. Bartender Special</p>
-        <img src="bartenderspecial.jpg" class="menu-img">
-        <button onclick="showOrderToast('Bartender Special')">Order this</button>
-    </div>
+    <section class="menu-section">
+        <h3 class="section-title">Alcoholic 🍸</h3>
+        <div class="menu-card">
+            <p class="dish-name">1. Bartender Special</p>
+            <img src="bartenderspecial.jpg" class="menu-img" alt="Bartender Special">
+            <span class="price-tag">RM 0.01</span>
+            <button onclick="addToCart('Bartender Special', 0.01)">Add to Cart</button>
+        </div>
+        <div class="menu-card">
+            <p class="dish-name">2. Ruhglanz</p>
+            <img src="ruhglanz.jpg" class="menu-img" alt="Ruhglanz">
+            <span class="price-tag">RM 0.01</span>
+            <button onclick="addToCart('Ruhglanz', 0.01)">Add to Cart</button>
+        </div>
+        <div class="menu-card">
+            <p class="dish-name">3. Curated by Khaimin</p>
+            <img src="curatedbykhaimin.jpg" class="menu-img" alt="Curated by Khaimin">
+            <span class="price-tag">RM 0.01</span>
+            <button onclick="addToCart('Curated by Khaimin', 0.01)">Add to Cart</button>
+        </div>
+    </section>
 
-    <div class="menu-card">
-        <p class="dish-name">2. Ruhglanz</p>
-        <img src="ruhglanz.jpg" class="menu-img">
-        <button onclick="showOrderToast('Ruhglanz')">Order this</button>
-    </div>
+    <section class="menu-section">
+        <h3 class="section-title">Non-Alcoholic 🥤</h3>
+        <div class="menu-card">
+            <p class="dish-name">4. Mojito (Virgin)</p>
+            <img src="mojito.jpg" class="menu-img" alt="Mojito">
+            <span class="price-tag">RM 0.01</span>
+            <button onclick="addToCart('Mojito', 0.01)">Add to Cart</button>
+        </div>
+        <div class="menu-card">
+            <p class="dish-name">5. Mocktail</p>
+            <img src="mocktail.jpg" class="menu-img" alt="Mocktail">
+            <span class="price-tag">RM 0.01</span>
+            <button onclick="addToCart('Mocktail', 0.01)">Add to Cart</button>
+        </div>
+        <div class="menu-card">
+            <p class="dish-name">6. Smoothie</p>
+            <img src="milkshake.jpg" class="menu-img" alt="Smoothie">
+            <span class="price-tag">RM 0.01</span>
+            <button onclick="addToCart('Smoothie', 0.01)">Add to Cart</button>
+        </div>
+    </section>
 
-    <div class="menu-card">
-        <p class="dish-name">3. Cocktail</p>
-        <img src="cocktail.jpg" class="menu-img">
-        <button onclick="showOrderToast('Cocktail')">Order this</button>
-    </div>
+    <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
 
-    <div id="toast" class="toast-hidden">Your order has been placed! 🍸</div>
+    <div id="cart-container" class="cart-container">
+        
+        <div id="cart-modal" class="modal-content">
+            <div class="modal-header">
+                <h3>Your Tray</h3>
+                <button class="close-btn" onclick="toggleCartModal()">✕</button>
+            </div>
+            <div id="cart-items-list"></div>
+            <div class="modal-footer">
+                <div class="total-row">
+                    <span>Total: <span id="modal-total">RM 0.00</span></span>
+                </div>
+                <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirm & Order 🍹</button>
+            </div>
+        </div>
+
+        <div id="cart-bar" class="cart-bar" onclick="toggleCartModal()">
+            <div class="cart-info">
+                <span id="cart-count">0</span> items | <span id="total-price">RM 0.00</span>
+            </div>
+            <p class="tap-hint">Tap to View Details</p>
+            <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
+        </div>
+
+    </div>
 
     <script src="script.js"></script>
 </body>
