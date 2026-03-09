@@ -23,18 +23,70 @@
         
         <div class="menu-card" data-category="custom alcoholic">
             <div class="badge">Best Seller ✨</div>
-            <p class="dish-name">1. Bartender Special</p>
-            <img src="bartenderspecial.jpg" class="menu-img" alt="Bartender Special">
-            <span class="price-tag">RM 0.00</span>
-            <button onclick="addToCart('Bartender Special', 0.01)">Add to Cart</button>
+            <p class="dish-name">1. Bartender Special</p >
+            < img src="bartenderspecial.jpg" class="menu-img" alt="Bartender Special">
+            <button onclick="addToCart('Bartender Special', 0)">Add to Cart</button>
         </div>
         
         <div class="menu-card" data-category="custom alcoholic">
-            <p class="dish-name">2. Ruhglanz</p>
-            <img src="ruhglanz.jpg" class="menu-img" alt="Ruhglanz">
-            <span class="price-tag">RM 0.00</span>
-            <button onclick="addToCart('Ruhglanz', 0.01)">Add to Cart</button>
+            <p class="dish-name">2. Ruhglanz</p >
+            < img src="ruhglanz.jpg" class="menu-img" alt="Ruhglanz">
+            <button onclick="addToCart('Ruhglanz', 0)">Add to Cart</button>
         </div>
+        
+        <div class="menu-card" data-category="custom alcoholic">
+            <p class="dish-name">3. Curated by Khaimin</p >
+            < img src="curatedbykhaimin.jpg" class="menu-img" alt="Curated by Khaimin">
+            <button onclick="addToCart('Curated by Khaimin', 0)">Add to Cart</button>
+        </div>
+
+        <div class="menu-card" data-category="non-alcoholic">
+            <p class="dish-name">4. Mojito (Virgin)</p >
+            < img src="mojito.jpg" class="menu-img" alt="Mojito">
+            <button onclick="addToCart('Mojito', 0)">Add to Cart</button>
+        </div>
+        
+        <div class="menu-card" data-category="non-alcoholic">
+            <p class="dish-name">5. Mocktail</p >
+            < img src="mocktail.jpg" class="menu-img" alt="Mocktail">
+            <button onclick="addToCart('Mocktail', 0)">Add to Cart</button>
+        </div>
+        
+        <div class="menu-card" data-category="non-alcoholic">
+            <p class="dish-name">6. Strawberry Smoothie</p >
+            < img src="milkshake.jpg" class="menu-img" alt="Smoothie">
+            <button onclick="addToCart('Smoothie', 0)">Add to Cart</button>
+        </div>
+        
+    </section>
+
+    <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
+
+    <div id="cart-container" class="cart-container">
+        
+        <div id="cart-modal" class="modal-content">
+            <div id="cart-items-list"></div>
+            <div class="modal-footer">
+                <div class="total-row">
+                    <span>Total: <span id="modal-total">RM 0.00</span></span>
+                </div>
+                <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirm & Order 🍹</button>
+            </div>
+        </div>
+
+        <div id="cart-bar" class="cart-bar" onclick="toggleCartModal()">
+            <div class="cart-info">
+                <span id="cart-count">0</span> items
+            </div>
+            <p class="tap-hint">Tap to view</p >
+            <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>        </div>
         
         <div class="menu-card" data-category="custom alcoholic">
             <p class="dish-name">3. Curated by Khaimin</p>
