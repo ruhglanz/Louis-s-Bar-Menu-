@@ -18,27 +18,28 @@ h1 { color: #fdfcfb; text-shadow: 0 4px 20px rgba(0,0,0,0.5); font-weight: 800; 
 h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing: 6px; font-weight: 300; opacity: 0.9; margin-top: 0; }
 
 /* =========================================
-   2. 菜单部分 (玻璃拟态 & 入场动画)
-   ========================================= */
-/* =========================================
-   2. 菜单部分 (升级为电脑/手机自适应响应式网格)
+   2. 菜单网格容器 (自适应布局)
    ========================================= */
 #menu-items-container {
     display: grid;
-    /* 核心魔法：屏幕不够宽就单列，足够宽就自动双列/三列，每列最小320px */
+    /* 核心魔法：屏幕窄时单列，宽时自动双/三列 */
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    max-width: 1050px; /* 限制电脑端最大宽度 */
+    gap: 25px; /* 卡片之间的间距稍微收紧 */
+    max-width: 1050px; 
     margin: 0 auto 80px auto;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 
+/* =========================================
+   3. 菜单卡片 (玻璃拟态 & 紧凑布局)
+   ========================================= */
 .menu-card {
     display: flex; flex-direction: column; align-items: center; justify-content: space-between;
     background: rgba(255, 255, 255, 0.04); 
     backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
-    padding: 35px; border-radius: 35px; 
-    width: 100%; box-sizing: border-box; /* 保证宽度对齐 */
+    padding: 30px 25px; /* 微缩内边距，让视觉更紧凑 */
+    border-radius: 35px; 
+    width: 100%; box-sizing: border-box; 
     border: 1px solid rgba(255, 255, 255, 0.12); 
     box-shadow: 0 25px 50px rgba(0,0,0,0.6), inset 0 0 15px rgba(255, 255, 255, 0.05);
     opacity: 0; transform: translateY(30px);
@@ -47,32 +48,63 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 
 .menu-img {
-    width: 100%; max-width: 380px; height: 380px; object-fit: cover;
-    border-radius: 25px; margin: 20px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    width: 100%; max-width: 380px; height: 320px; /* 稍微压缩了一点高度让卡片更稳 */
+    object-fit: cover;
+    border-radius: 25px; margin: 15px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
-.price-tag { font-size: 22px; color: #c5a059 !important; font-weight: 700; margin-bottom: 15px; }
+/* 核心优化：菜名行间距微缩 */
+.dish-name {
+    font-size: 19px; 
+    font-weight: 700; 
+    color: #fdfcfb; 
+    margin: 5px 0; 
+    line-height: 1.4; /* 缩微 7% 左右，解决违和感 */
+    letter-spacing: -0.01em; /* 稍微紧缩字间距 */
+}
+
+.price-tag { font-size: 20px; color: #c5a059 !important; font-weight: 700; margin-bottom: 12px; }
 
 /* =========================================
-   3. 按钮样式 (iOS 风格金色渐变)
+   4. 分类标签栏 (9px 间距极致优化)
+   ========================================= */
+.category-tabs {
+    display: flex; 
+    gap: 9px; /* 精准微调间距 */
+    overflow-x: auto; 
+    padding: 10px 20px; 
+    margin: 0 auto 30px auto; 
+    max-width: 900px; 
+    scrollbar-width: none; -ms-overflow-style: none;
+}
+.category-tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+    background: rgba(255, 255, 255, 0.05); color: #e2d1c3; border: 1px solid transparent;
+    padding: 9px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+    white-space: nowrap; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+
+.tab-btn.active {
+    background: rgba(197, 160, 89, 0.15); color: #c5a059; 
+    border: 1px solid rgba(197, 160, 89, 0.5); box-shadow: 0 4px 15px rgba(197, 160, 89, 0.1);
+}
+
+/* =========================================
+   5. 按钮样式 (iOS 触感回馈)
    ========================================= */
 .menu-card button, #order-now-btn, .checkout-btn, .confirm-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
-    color: #1a130f; border: none; padding: 12px 24px; border-radius: 20px;
-    font-size: 16px; font-weight: 700; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #1a130f; border: none; padding: 11px 24px; border-radius: 20px;
+    font-size: 15px; font-weight: 700; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 8px 20px rgba(197, 160, 89, 0.2);
 }
 
 .menu-card button:active, #order-now-btn:active { transform: scale(0.95); opacity: 0.9; }
 
-/* 购物车内部的数量加减按钮 */
-.qty-btn {
-    background: rgba(255, 255, 255, 0.1) !important; color: #fdfcfb !important; border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    width: 34px; height: 34px; border-radius: 12px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
-
 /* =========================================
-   4. 底部购物车 Tray - 终极无缝架构
+   6. 底部购物车 Tray (无缝衔接架构)
    ========================================= */
 .cart-container {
     position: fixed; bottom: -500px; left: 50%; transform: translateX(-50%);
@@ -81,7 +113,6 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 }
 .cart-container-show { bottom: 30px !important; }
 
-/* 面板内容容器 */
 .modal-content {
     background: rgba(20, 15, 12, 0.98); backdrop-filter: blur(25px) saturate(150%);
     border-radius: 30px 30px 0 0; border: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none;
@@ -89,23 +120,17 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transform: translateY(20px); transition: all 0.4s ease; position: relative;
 }
 
-/* 如果 HTML 里还有原本的 header，我们强制隐藏它，统一使用 JS 生成的打叉 */
-.modal-header { display: none !important; }
-
 .modal-active .modal-content { 
     opacity: 1; visibility: visible; transform: translateY(0); 
     max-height: 600px; padding: 30px 25px 25px 25px; pointer-events: auto;
 }
 
-/* JS 动态生成的关闭按钮样式 */
 .close-tray {
     position: absolute; top: 18px; right: 20px; font-size: 32px; color: rgba(255, 255, 255, 0.3);
     cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
     transition: all 0.2s; z-index: 100;
 }
-.close-tray:hover { color: #c5a059; transform: rotate(90deg); }
 
-/* 底部底座栏 (无缝衔接核心) */
 .cart-bar {
     background: rgba(30, 25, 20, 0.95); backdrop-filter: blur(25px) saturate(180%);
     padding: 14px 22px; border-radius: 28px; 
@@ -115,74 +140,32 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     transition: border-radius 0.3s ease;
 }
 
-/* 面板打开时：底座上方圆角变直，压住缝隙 */
+/* 打开面板时圆角变直，无缝贴合 */
 .modal-active .cart-bar { 
     border-radius: 0 0 28px 28px !important; 
-    margin-top: -1px; /* 向上微调覆盖边框线 */
+    margin-top: -1px; 
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.tap-hint { font-size: 12px; opacity: 0.5; margin: 0; letter-spacing: 1px; }
-
 /* =========================================
-   5. Toast (玻璃感通知)
+   7. 其他组件 (Toast & Badges)
    ========================================= */
 .toast-hidden {
     position: fixed; top: -180px; left: 50%; transform: translateX(-50%);
-    background: rgba(197, 160, 89, 0.85); 
-    backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+    background: rgba(197, 160, 89, 0.85); backdrop-filter: blur(20px);
     color: #1a130f; padding: 14px 30px; border-radius: 25px;
-    font-weight: 700; z-index: 3000; max-width: 280px; text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    font-weight: 700; z-index: 3000; border: 1px solid rgba(255, 255, 255, 0.3);
     transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 .toast-show { top: 40px; }
 
-/* 列表条目微调 */
-.cart-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 15px; }
-.cart-item:last-child { border-bottom: none; }
-
-/* 进场动画定义 */
-@keyframes fadeInUp { 
-    from { opacity: 0; transform: translateY(30px); } 
-    to { opacity: 1; transform: translateY(0); } 
-}
-
-/* =========================================
-   6. 分类标签栏与徽章特效 (新增插件)
-   ========================================= */
-/* 隐藏滚动条的横向滑动栏 */
-.category-tabs {
-    display: flex; gap: 12px; overflow-x: auto; padding: 10px 20px; 
-    margin: 0 auto 30px auto; max-width: 900px; 
-    scrollbar-width: none; -ms-overflow-style: none; /* 隐藏原生滚动条 */
-}
-.category-tabs::-webkit-scrollbar { display: none; }
-
-/* 玻璃感未选中状态 */
-.tab-btn {
-    background: rgba(255, 255, 255, 0.05); color: #e2d1c3; border: 1px solid transparent;
-    padding: 10px 22px; border-radius: 20px; font-size: 15px; font-weight: 600; cursor: pointer;
-    white-space: nowrap; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-}
-.tab-btn:hover { background: rgba(255, 255, 255, 0.1); }
-
-/* 玻璃感选中状态 (加深不透明度 + 细描边 + 文字高亮) */
-.tab-btn.active {
-    background: rgba(197, 160, 89, 0.15); color: #c5a059; 
-    border: 1px solid rgba(197, 160, 89, 0.5); box-shadow: 0 4px 15px rgba(197, 160, 89, 0.1);
-}
-
-/* Best Seller 徽章样式 */
-.menu-card { position: relative; transition: opacity 0.4s ease, transform 0.4s ease; }
 .badge {
-    position: absolute; top: -12px; right: -12px; 
+    position: absolute; top: -10px; right: -10px; 
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
-    color: #1a130f; padding: 6px 14px; border-radius: 15px;
-    font-size: 13px; font-weight: 800; box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+    color: #1a130f; padding: 5px 12px; border-radius: 12px;
+    font-size: 12px; font-weight: 800; box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
     z-index: 10; transform: rotate(5deg);
 }
 
-/* 用于 JS 平滑过滤的隐藏类 */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .hide-card { display: none !important; }
