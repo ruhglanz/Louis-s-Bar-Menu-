@@ -1,5 +1,5 @@
 /* =========================================
-   1. 基础背景 (保持不变)
+   1. 基础背景 (极致暗黑 - 保持不变)
    ========================================= */
 body {
     background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
@@ -15,113 +15,123 @@ body {
 }
 
 /* =========================================
-   2. 菜单网格 (修复图片对齐)
+   2. 菜单网格 (修复图片错位 & 响应式)
    ========================================= */
 #menu-items-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
+    gap: 25px;
     max-width: 1050px; 
     margin: 0 auto 80px auto;
 }
 
 @media (max-width: 600px) {
     #menu-items-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(2, 1fr); /* 手机端一排两个 */
+        gap: 12px;
     }
 }
 
 .menu-card {
-    display: flex; flex-direction: column; 
+    display: flex; flex-direction: column; align-items: center;
     background: rgba(255, 255, 255, 0.04); 
     backdrop-filter: blur(16px) saturate(180%); -webkit-backdrop-filter: blur(16px) saturate(180%);
-    padding: 20px 12px; border-radius: 28px; 
+    padding: 20px 15px; border-radius: 30px; 
     border: 1px solid rgba(255, 255, 255, 0.12); 
     box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    /* 动画恢复 */
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
     animation: fadeInUp 0.8s ease forwards;
 }
 
-/* 核心修复：锁定名字高度，保证图片对齐 */
+/* 核心修复：锁定名字高度，确保下方图片水平对齐 */
 .dish-name {
-    font-size: 15px; font-weight: 700; color: #fdfcfb; 
-    margin: 5px 0; min-height: 42px; /* 关键：固定两行文字的高度 */
+    font-size: 16px; font-weight: 700; color: #fdfcfb; 
+    margin: 10px 0; 
+    min-height: 48px; /* 关键：固定名字占用的高度 */
     display: flex; align-items: center; justify-content: center;
+    line-height: 1.2;
 }
 
 .menu-img {
-    width: 100%; height: 130px; object-fit: cover;
-    border-radius: 18px; margin-bottom: 10px;
+    width: 100%; height: 140px; object-fit: cover;
+    border-radius: 20px; margin-bottom: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
 @media (min-width: 601px) {
-    .menu-img { height: 260px; }
+    .menu-img { height: 280px; }
     .dish-name { font-size: 19px; min-height: 54px; }
 }
 
 /* =========================================
-   3. 按钮动画找回
+   3. 按钮与动画 (恢复丝滑感)
    ========================================= */
 .menu-card button, .checkout-btn, .confirm-btn, #order-now-btn {
     background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
-    color: #1a130f; border: none; padding: 10px; border-radius: 16px;
-    font-size: 13px; font-weight: 700; cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.2s;
+    color: #1a130f; border: none; 
+    padding: 10px 20px; border-radius: 18px;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 恢复全局过渡 */
 }
 
 .menu-card button:active, #order-now-btn:active {
     transform: scale(0.92); /* 恢复点击缩小动画 */
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 /* =========================================
-   4. 底部 Tray 修复 (透明度与布局)
+   4. 底部 Tray 修复 (解决变色、过长、三行字问题)
    ========================================= */
-.cart-bar {
-    background: rgba(30, 25, 20, 0.85); /* 调高透明度，恢复“冰感” */
-    backdrop-filter: blur(25px) saturate(200%);
-    padding: 10px 16px; border-radius: 24px;
-    display: flex !important; justify-content: space-between !important; align-items: center !important;
-    width: 100%; box-sizing: border-box;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+.cart-container {
+    position: fixed; bottom: -500px; left: 50%; transform: translateX(-50%);
+    width: 90%; max-width: 480px; z-index: 2000;
+    transition: bottom 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
 }
 
-/* 修复手机端三行字问题 */
+.cart-bar {
+    background: rgba(30, 25, 20, 0.7); /* 降低不透明度，恢复冰感 */
+    backdrop-filter: blur(25px) saturate(200%);
+    padding: 12px 18px; border-radius: 26px;
+    display: flex !important; justify-content: space-between !important; align-items: center !important;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    pointer-events: auto;
+}
+
+/* 修复手机端文字挤成三行 */
 .cart-info {
-    text-align: left; flex: 1; 
-    font-size: 12px; line-height: 1.2;
-    margin-right: 10px;
+    text-align: left; font-size: 12px; color: #e2d1c3;
+    display: flex; flex-direction: column; gap: 2px;
 }
 
 #order-now-btn {
-    width: auto; min-width: 100px; max-width: 140px; /* 限制按钮长度 */
-    padding: 8px 15px;
+    width: auto !important; /* 修复按钮过长问题 */
+    padding: 8px 18px; font-size: 13px;
 }
 
-/* 修复关闭叉叉动画 */
+/* 修复叉叉旋转动画 */
 .close-tray {
     position: absolute; top: 15px; right: 15px; 
-    font-size: 28px; color: rgba(255, 255, 255, 0.4);
-    transition: all 0.3s ease;
+    font-size: 28px; color: rgba(255, 255, 255, 0.3);
+    cursor: pointer; transition: all 0.4s ease;
 }
 .close-tray:hover { transform: rotate(90deg); color: #c5a059; }
 
 /* =========================================
-   5. Toast 与 Tab (优化透明度与流畅度)
+   5. Toast 通知 (恢复透明度)
    ========================================= */
-.tab-btn {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* 增强平滑度 */
-}
-
 .toast-hidden {
-    background: rgba(197, 160, 89, 0.7); /* 恢复更高透明度 */
-    backdrop-filter: blur(15px);
+    background: rgba(197, 160, 89, 0.65); /* 极致透明度 */
+    backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #1a130f; padding: 12px 25px; border-radius: 30px;
+    font-weight: 700; z-index: 3000;
+    transition: top 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
 
-@keyframes fadeInUp { 
-    from { opacity: 0; transform: translateY(20px); } 
-    to { opacity: 1; transform: translateY(0); } 
+/* Tab 切换流畅度 */
+.tab-btn {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
