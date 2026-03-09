@@ -41,20 +41,20 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
 
 .price-tag { font-size: 22px; color: #c5a059; font-weight: 700; margin-bottom: 15px; }
 
-/* 3. 按钮样式 - 纯色无边框 */
+/* 3. 按钮样式 */
 .menu-card button, #order-now-btn, .checkout-btn {
     background: #c5a059; color: #1a130f; border: none !important;
     padding: 12px 25px; border-radius: 20px; font-size: 16px;
     font-weight: 700; cursor: pointer; transition: all 0.3s ease;
 }
 
-/* 4. 重点：抽屉式购物车交互布局 */
+/* 4. 底部 Tray & 抽屉交互布局 */
 .cart-container {
     position: fixed;
-    bottom: -250px; /* 初始完全隐藏 */
+    bottom: -300px; 
     left: 50%;
     transform: translateX(-50%);
-    width: 95%;
+    width: 92%; /* 稍微收窄一点，更有悬浮感 */
     max-width: 500px;
     z-index: 2000;
     transition: bottom 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -63,53 +63,74 @@ h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing:
     justify-content: flex-end;
 }
 
-/* 显示容器 */
 .cart-container-show { bottom: 30px !important; }
 
-/* 底部 Tray 条 */
+/* 底部 Tray 条修复：增加左右 padding，防止按钮贴边 */
 .cart-bar {
-    background: rgba(15, 10, 5, 0.98);
+    background: rgba(20, 15, 10, 0.96);
     backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-    padding: 12px 20px; border-radius: 25px;
+    padding: 12px 18px; /* 增加内边距 */
+    border-radius: 28px;
     display: flex !important; flex-direction: row !important;
     justify-content: space-between !important; align-items: center !important;
     box-shadow: 0 10px 40px rgba(0,0,0,0.6);
     border: 1px solid rgba(197, 160, 89, 0.2);
-    cursor: pointer; position: relative; z-index: 5; height: 65px;
+    cursor: pointer; position: relative; z-index: 5; height: 68px;
+    box-sizing: border-box; /* 确保 padding 不会撑破宽度 */
 }
 
 /* 抽屉内容 */
 .modal-content {
-    background: #1a130f; color: #e2d1c3; border-radius: 25px 25px 0 0;
+    background: #1a130f; color: #e2d1c3; border-radius: 28px 28px 0 0;
     border: 1px solid rgba(197, 160, 89, 0.2); border-bottom: none;
-    padding: 20px; margin-bottom: -20px;
+    padding: 20px; margin-bottom: -25px;
     max-height: 0; opacity: 0; overflow: hidden;
     transform: translateY(20px); transition: all 0.4s ease;
 }
 
-/* 激活抽屉 */
 .modal-active .modal-content {
-    max-height: 450px; opacity: 1; transform: translateY(0);
-    margin-bottom: -5px; padding-bottom: 35px;
+    max-height: 480px; opacity: 1; transform: translateY(0);
+    margin-bottom: -5px; padding-bottom: 40px;
 }
 
 /* 5. 内部元素细节 */
-.cart-info { font-size: 14px; white-space: nowrap; }
-.tap-hint { font-size: 11px; opacity: 0.5; margin: 0 5px; white-space: nowrap; }
+.cart-info { font-size: 14px; white-space: nowrap; flex: 1; text-align: left; }
+.tap-hint { font-size: 11px; opacity: 0.5; margin: 0 10px; white-space: nowrap; flex: 1; }
 #cart-count { background: #c5a059; color: #1a1a2e; padding: 2px 8px; border-radius: 10px; font-weight: 800; }
 
-.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(197, 160, 89, 0.1); }
-.qty-btn {
-    background-color: #c5a059 !important; color: #1a130f !important;
-    border: none !important; width: 28px; height: 28px; border-radius: 50%;
-    display: inline-flex; justify-content: center; align-items: center; cursor: pointer;
+#order-now-btn {
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    border-radius: 18px !important;
+    margin-left: 10px; /* 确保左侧有间距 */
+    white-space: nowrap;
 }
 
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-.close-btn { background: none; border: none; color: #c5a059; font-size: 20px; cursor: pointer; }
+/* 6. Toast 样式微调：iOS 模糊质感 */
+.toast-hidden {
+    position: fixed;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(197, 160, 89, 0.9); /* 琥珀金色半透明 */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #1a130f;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: top 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    z-index: 3000;
+    white-space: nowrap;
+}
+.toast-show { top: 40px; }
 
-/* 提示框 */
-.toast-hidden { position: fixed; top: -50px; left: 50%; transform: translateX(-50%); background: #c5a059; color: #1a130f; padding: 10px 25px; border-radius: 20px; font-weight: bold; transition: top 0.4s; z-index: 3000; }
-.toast-show { top: 30px; }
-
+/* 动画效果 */
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 响应式微调 */
+@media (max-width: 400px) {
+    .tap-hint { display: none; } /* 屏幕太小时隐藏中间文字，腾出空间给按钮 */
+}
