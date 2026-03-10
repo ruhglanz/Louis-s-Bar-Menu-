@@ -1,5 +1,5 @@
 /* =========================================
-   1. 基础背景与整体氛围
+   1. 基础背景与整体氛围 (极致暗黑)
    ========================================= */
 body {
     background: radial-gradient(circle at 50% 50%, #2c1e14 0%, #0a0806 100%);
@@ -13,214 +13,111 @@ body {
     overflow-x: hidden;
 }
 
-h1 { 
-    color: #fdfcfb; 
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5); 
-    font-weight: 800; 
-    margin-bottom: 5px; 
-}
-h2 { 
-    color: #c5a059; 
-    font-size: 24px; 
-    text-transform: uppercase; 
-    letter-spacing: 6px; 
-    font-weight: 300; 
-    margin-top: 0;
-}
+h1 { color: #fdfcfb; text-shadow: 0 4px 20px rgba(0,0,0,0.5); font-weight: 800; margin-bottom: 5px; }
+h2 { color: #c5a059; font-size: 24px; text-transform: uppercase; letter-spacing: 6px; font-weight: 300; opacity: 0.9; margin-top: 0; }
 
 /* =========================================
-   2. 分类标签 (完美居中修复)
+   2. 分类标签 (完美居中布局)
    ========================================= */
 .category-tabs {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    width: 100%; /* 撑满容器 */
-    max-width: 100%;
-    margin: 0 auto 30px auto;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    justify-content: center; /* 核心：PC端和内容少时居中 */
+    display: flex; gap: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    width: max-content; max-width: 100%; margin: 0 auto 30px auto;
+    padding: 10px 20px; box-sizing: border-box; justify-content: center;
     scrollbar-width: none;
 }
 .category-tabs::-webkit-scrollbar { display: none; }
 
 .tab-btn {
-    background: rgba(255, 255, 255, 0.08);
-    color: #e2d1c3;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 9px 20px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
+    background: rgba(255, 255, 255, 0.08); color: #e2d1c3; border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 9px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; cursor: pointer;
+    white-space: nowrap; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-.tab-btn.active {
-    background: rgba(197, 160, 89, 0.35);
-    color: #fdfcfb;
-    border: 1px solid #c5a059;
-    box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
-}
+.tab-btn.active { background: rgba(197, 160, 89, 0.35); color: #fdfcfb; border: 1px solid #c5a059; box-shadow: 0 0 20px rgba(197, 160, 89, 0.4); }
 
 /* =========================================
-   3. 菜单卡片布局
+   3. 菜单网格与卡片 (修正图片显示)
    ========================================= */
 #menu-items-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    max-width: 1050px; 
-    margin: 0 auto 80px auto;
-    padding: 0 10px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px; max-width: 1050px; margin: 0 auto 80px auto; padding: 0 10px;
 }
 
 .menu-card {
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.04); 
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    padding: 30px 25px; 
-    border-radius: 35px; 
-    border: 1px solid rgba(255, 255, 255, 0.12); 
-    box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-    opacity: 0; 
-    animation: fadeInUp 0.8s forwards;
-    position: relative; 
-    transition: all 0.3s ease;
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    padding: 30px 25px; border-radius: 35px; border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.6); animation: fadeInUp 0.8s ease forwards;
 }
 
 .menu-img {
-    width: 100%; 
-    height: 280px; 
-    object-fit: cover;
-    border-radius: 25px; 
-    margin: 15px 0;
+    width: 100%; height: 320px; object-fit: cover; border-radius: 25px;
+    margin: 15px 0; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    background: rgba(255,255,255,0.05);
+    opacity: 1; /* 修正：确保图片默认可见 */
     pointer-events: none;
 }
 
-.dish-name {
-    font-size: 19px; 
-    font-weight: 700; 
-    color: #fdfcfb; 
-    min-height: 2.8em;
-    display: flex;
-    align-items: center;
-}
+.dish-name { font-size: 19px; font-weight: 700; color: #fdfcfb; min-height: 2.8em; display: flex; align-items: center; }
 
 /* =========================================
-   4. 购物车底部栏 (Grid 绝对居中修复)
+   4. 购物车动画核心 (iOS 弹性效果)
    ========================================= */
 .cart-container {
-    position: fixed; 
-    bottom: -500px; 
-    left: 50%; 
-    transform: translateX(-50%);
-    width: 95%;
-    max-width: 500px; 
-    z-index: 2000;
-    transition: bottom 0.4s ease; 
+    position: fixed; bottom: -120px; left: 50%; transform: translateX(-50%) scale(0.95);
+    width: 95%; max-width: 500px; z-index: 2000; opacity: 0;
+    transition: bottom 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
     pointer-events: none;
 }
-.cart-container-show { bottom: 30px !important; }
 
-.cart-bar {
-    background: rgba(30, 25, 20, 0.98); 
-    backdrop-filter: blur(25px);
-    padding: 8px 8px 8px 20px; 
-    border-radius: 40px; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    box-shadow: 0 15px 45px rgba(0,0,0,0.7);
-    cursor: pointer;
-    pointer-events: auto;
-    
-    /* 核心修改：使用 Grid 强制三等分对齐 */
-    display: grid !important;
-    grid-template-columns: 1fr auto 1fr; /* 左、中、右 */
-    align-items: center;
-}
+.cart-container-show { bottom: 30px !important; opacity: 1 !important; transform: translateX(-50%) scale(1) !important; }
 
-/* 左侧计数对齐 */
-.cart-info {
-    text-align: left;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* 中间提示文字绝对居中 */
-.tap-hint {
-    margin: 0;
-    font-size: 13px;
-    opacity: 0.6;
-    white-space: nowrap;
-}
-
-/* 右侧按钮区域靠右 */
-.cart-action {
-    display: flex;
-    justify-content: flex-end;
-}
-
-#order-now-btn {
-    background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%);
-    color: #1a130f; 
-    border: none; 
-    padding: 10px 20px; 
-    border-radius: 25px;
-    font-size: 14px; 
-    font-weight: 800; 
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(197, 160, 89, 0.3);
-}
-
-/* 弹窗样式 */
 .modal-content {
-    background: rgba(20, 15, 12, 0.98); 
-    border-radius: 30px 30px 0 0; 
-    border: 1px solid rgba(255, 255, 255, 0.15); 
-    max-height: 0; 
-    overflow: hidden;
-    transition: all 0.4s ease;
-    width: 100%;
+    background: rgba(20, 15, 12, 0.98); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+    border-radius: 35px 35px 0 0; border: 1px solid rgba(255, 255, 255, 0.15); border-bottom: none;
+    max-height: 0; opacity: 0; visibility: hidden; transform: translateY(40px);
+    transition: max-height 0.5s ease, transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+    width: 100%; box-sizing: border-box; overflow: hidden;
 }
-.modal-active .modal-content {
-    max-height: 60vh;
-    padding: 20px;
-    pointer-events: auto;
+
+.modal-active .modal-content { max-height: 65vh; opacity: 1; visibility: visible; transform: translateY(0); padding: 30px 25px 20px; pointer-events: auto; }
+
+/* =========================================
+   5. 底部胶囊栏 (Grid 布局解决挤压)
+   ========================================= */
+.cart-bar {
+    background: rgba(30, 25, 20, 0.96); backdrop-filter: blur(25px);
+    padding: 10px 10px 10px 24px; border-radius: 40px; border: 1px solid rgba(255, 255, 255, 0.15);
+    display: grid !important; /* 使用 Grid 强制三段排列 */
+    grid-template-columns: 80px 1fr 110px; 
+    align-items: center !important;
+    position: relative; z-index: 5; pointer-events: auto;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.modal-active .cart-bar {
-    border-radius: 0 0 30px 30px;
+
+.cart-info { justify-self: start; font-weight: 600; font-size: 14px; }
+.tap-hint, .tap-hint-view { justify-self: center; margin: 0; font-size: 13px; opacity: 0.6; color: #c5a059; }
+#order-now-btn { justify-self: end; background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%); border: none; padding: 10px 20px; border-radius: 20px; font-weight: 700; cursor: pointer; }
+
+/* 开启状态的形态转换 */
+.modal-active .cart-bar { border-radius: 0 0 35px 35px !important; background: rgba(35, 30, 25, 1) !important; }
+
+/* =========================================
+   6. 手机端适配加强
+   ========================================= */
+@media screen and (max-width: 768px) {
+    #menu-items-container { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+    .menu-card { padding: 18px 10px !important; border-radius: 20px !important; }
+    .menu-img { height: 160px !important; border-radius: 12px !important; }
+    .dish-name { font-size: 14px !important; }
+    .cart-bar { grid-template-columns: 60px 1fr 90px; padding: 8px 8px 8px 18px !important; }
+    #order-now-btn { padding: 8px 15px !important; font-size: 12px !important; }
 }
 
 /* =========================================
-   5. 适配移动端
+   7. 动画与通用
    ========================================= */
-@media screen and (max-width: 768px) {
-    .category-tabs {
-        justify-content: flex-start; /* 手机端内容多时允许左对齐滚动 */
-    }
-    #menu-items-container {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-    .menu-card { padding: 15px 10px; border-radius: 20px; }
-    .menu-img { height: 140px; }
-    .dish-name { font-size: 14px; }
-    
-    .cart-bar { padding-left: 15px; }
-    .cart-info { font-size: 12px; }
-    .tap-hint { font-size: 11px; }
-    #order-now-btn { padding: 8px 14px; font-size: 12px; }
-}
-
-/* 其他基础样式 */
-.badge { position: absolute; top: -10px; right: -10px; background: #c5a059; color: #fff; padding: 4px 10px; border-radius: 10px; font-size: 11px; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-* { user-select: none; -webkit-user-select: none; box-sizing: border-box; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.hide-card { display: none !important; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+img { pointer-events: none; user-select: none; }
