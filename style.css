@@ -234,39 +234,91 @@ h2 {
 /* =========================================
    6. 购物车底部栏（修改：胶囊形态居中优化）
    ========================================= */
+/* =========================================
+   购物车动画优化：iOS 抽屉感
+   ========================================= */
+
+/* 1. 底部栏整体容器 */
 .cart-container {
     position: fixed; 
-    bottom: -500px; 
+    bottom: -100px; /* 初始隐藏在屏幕外 */
     left: 50%; 
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.9); /* 初始缩小 */
     width: 95%;
-    max-width: 480px; /* 稍微缩小最大宽度，让整体更像居中的“灵动岛” */
+    max-width: 500px; 
     z-index: 2000;
-    transition: bottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+    opacity: 0;
+    /* 使用弹性贝塞尔曲线：带有轻微回弹感 */
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); 
     pointer-events: none;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
 }
-.cart-container-show { bottom: 30px !important; }
 
+/* 购物车显示时的状态 */
+.cart-container-show { 
+    bottom: 30px !important; 
+    opacity: 1 !important;
+    transform: translateX(-50%) scale(1) !important;
+}
+
+/* 2. 展开后的详情列表 (模态框) */
 .modal-content {
     background: rgba(20, 15, 12, 0.98); 
-    backdrop-filter: blur(25px) saturate(150%);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-radius: 30px 30px 0 0; 
     border: 1px solid rgba(255, 255, 255, 0.15); 
     border-bottom: none;
-    opacity: 0; 
-    visibility: hidden; 
+    
+    /* 核心动画属性 */
     max-height: 0; 
-    padding: 0 25px; 
-    overflow: hidden;
-    transform: translateY(20px); 
-    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
-    width: 100%; 
-    box-sizing: border-box; 
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(40px); /* 初始向下偏移 */
+    transition: 
+        max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.4s ease;
+    
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* 模态框激活状态 */
+.modal-active .modal-content {
+    max-height: 60vh; /* 展开高度 */
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); /* 回到原位 */
+    padding: 25px;
+    pointer-events: auto;
+}
+
+/* 3. 底部胶囊栏在打开时的形态转换 */
+.cart-bar {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* ... 保持你之前的 grid 布局不变 ... */
+}
+
+.modal-active .cart-bar {
+    border-radius: 0 0 30px 30px !important; /* 底部变方，对接模态框 */
+    background: rgba(35, 30, 25, 1); /* 颜色加深增强整体感 */
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.3);
+}
+
+/* 4. 列表内部条目的入场动画 */
+.modal-active #cart-items-list > div {
+    animation: itemSlideUp 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* 让列表条目一个接一个跳出来 (交错感) */
+.modal-active #cart-items-list > div:nth-child(1) { animation-delay: 0.1s; }
+.modal-active #cart-items-list > div:nth-child(2) { animation-delay: 0.15s; }
+.modal-active #cart-items-list > div:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes itemSlideUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 .modal-active .modal-content { 
     opacity: 1; 
     visibility: visible; 
