@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Louis's Bar | Digital Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Louis's Bar</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <h1>Louis's Bar</h1>
     <h2>MENU</h2>
 
@@ -21,6 +20,7 @@
     </div>
 
     <section class="menu-section" id="menu-items-container">
+        
         <div class="menu-card" data-category="custom alcoholic">
             <div class="badge">Best Seller ✨</div>
             <p class="dish-name">1. Bartender Special</p>
@@ -57,6 +57,7 @@
             <img src="milkshake.jpg" class="menu-img" alt="Smoothie">
             <button onclick="addToCart('Smoothie', 0)">Add to Cart</button>
         </div>
+        
     </section>
 
     <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
@@ -65,11 +66,10 @@
         
         <div id="cart-modal" class="modal-content">
             <div id="cart-items-list"></div>
-            
-            <div class="modal-footer" style="padding: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);">
-                <button class="checkout-btn" onclick="sendWhatsAppOrder()" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #d4b475 0%, #c5a059 100%); border: none; border-radius: 15px; color: #1a130f; font-weight: 800; font-size: 16px; cursor: pointer;">
-                    Confirm & Order 🍹
-                </button>
+            <div class="modal-footer">
+                <div class="total-row">
+                </div>
+                <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirm & Order 🍹</button>
             </div>
         </div>
 
@@ -77,13 +77,32 @@
             <div class="cart-info">
                 <span id="cart-count">0</span> items
             </div>
-            
-            <p class="tap-hint">Tap to view</p>
-            
-            <div class="cart-action">
-                <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
+            <p class="tap-hint">Tap to view</p >
+            <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
+        </div>
+
+    </div>
+
+    <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
+
+    <div id="cart-container" class="cart-container">
+        
+        <div id="cart-modal" class="modal-content">
+            <div id="cart-items-list"></div>
+            <div class="modal-footer">
+                <div class="total-row">
+                </div>
+                <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirm & Order 🍹</button>
             </div>
         </div>
+
+        <div id="cart-bar" class="cart-bar" onclick="toggleCartModal()">
+            <div class="cart-info">
+            </div>
+            <p class="tap-hint">Tap to View Details</p >
+            <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
