@@ -21,32 +21,32 @@
 
     <section class="menu-section" id="menu-items-container">
         
-        <div class="menu-card" data-category="custom alcoholic">
+        <div class="menu-card" data-category="custom cocktail alcoholic">
             <div class="badge">Best Seller ✨</div>
             <p class="dish-name">1. Bartender Special</p>
             <img src="bartenderspecial.jpg" class="menu-img" alt="Bartender Special">
             <button onclick="addToCart('Bartender Special', 0)">Add to Cart</button>
         </div>
         
-        <div class="menu-card" data-category="custom alcoholic">
+        <div class="menu-card" data-category="custom cocktail alcoholic">
             <p class="dish-name">2. Ruhglanz</p>
             <img src="ruhglanz.jpg" class="menu-img" alt="Ruhglanz">
             <button onclick="addToCart('Ruhglanz', 0)">Add to Cart</button>
         </div>
         
-        <div class="menu-card" data-category="custom alcoholic">
+        <div class="menu-card" data-category="custom cocktail alcoholic">
             <p class="dish-name">3. Curated by Khaimin</p>
             <img src="curatedbykhaimin.jpg" class="menu-img" alt="Curated by Khaimin">
             <button onclick="addToCart('Curated by Khaimin', 0)">Add to Cart</button>
         </div>
 
-        <div class="menu-card" data-category="non-alcoholic">
+        <div class="menu-card" data-category="non-alcoholic mocktail">
             <p class="dish-name">4. Mojito (Virgin)</p>
             <img src="mojito.jpg" class="menu-img" alt="Mojito">
             <button onclick="addToCart('Mojito', 0)">Add to Cart</button>
         </div>
         
-        <div class="menu-card" data-category="non-alcoholic">
+        <div class="menu-card" data-category="non-alcoholic mocktail">
             <p class="dish-name">5. Mocktail</p>
             <img src="mocktail.jpg" class="menu-img" alt="Mocktail">
             <button onclick="addToCart('Mocktail', 0)">Add to Cart</button>
@@ -78,28 +78,6 @@
                 <span id="cart-count">0</span> items
             </div>
             <p class="tap-hint">Tap to view</p >
-            <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
-        </div>
-
-    </div>
-
-    <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
-
-    <div id="cart-container" class="cart-container">
-        
-        <div id="cart-modal" class="modal-content">
-            <div id="cart-items-list"></div>
-            <div class="modal-footer">
-                <div class="total-row">
-                </div>
-                <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirm & Order 🍹</button>
-            </div>
-        </div>
-
-        <div id="cart-bar" class="cart-bar" onclick="toggleCartModal()">
-            <div class="cart-info">
-            </div>
-            <p class="tap-hint">Tap to View Details</p >
             <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
         </div>
 
