@@ -173,45 +173,45 @@ h2 {
 }
 
 /* =========================================
-   5. 分类标签 (恢复 hover 效果)
+   5. 分类标签 (修复滑动卡顿 + 兼容所有手机)
    ========================================= */
 .category-tabs {
-    display: flex; 
-    gap: 12px; 
-    overflow-x: auto; 
-    padding: 10px 20px; 
-    margin: 0 auto 30px auto; 
-    max-width: 900px; 
-    justify-content: center; 
-    scrollbar-width: none; 
-    -ms-overflow-style: none;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 10px 20px;
+    margin: 0 auto 30px auto;
+    max-width: 100%;
+    justify-content: flex-start; /* 👈 修复滑动 */
+    scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 .category-tabs::-webkit-scrollbar { display: none; }
 
 .tab-btn {
-    background: rgba(255, 255, 255, 0.08); 
-    color: #e2d1c3; 
+    background: rgba(255, 255, 255, 0.08);
+    color: #e2d1c3;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 9px 20px; 
-    border-radius: 20px; 
-    font-size: 14px; 
-    font-weight: 600; 
+    padding: 9px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    white-space: nowrap; 
-    backdrop-filter: blur(20px) saturate(180%); 
+    white-space: nowrap;
+    backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    scroll-snap-align: start;
 }
 
 .tab-btn.active {
-    background: rgba(197, 160, 89, 0.35); 
-    color: #fdfcfb; 
+    background: rgba(197, 160, 89, 0.35);
+    color: #fdfcfb;
     border: 1px solid #c5a059;
     box-shadow: 0 0 20px rgba(197, 160, 89, 0.4);
 }
 
-/* 恢复标签 hover 效果 */
 .tab-btn:not(.active):hover {
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.2);
@@ -220,6 +220,7 @@ h2 {
 .tab-btn:active {
     transform: scale(0.95);
 }
+
 
 /* =========================================
    6. 购物车底部栏
