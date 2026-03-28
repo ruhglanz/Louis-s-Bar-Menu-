@@ -21,40 +21,46 @@
 
     <section class="menu-section" id="menu-items-container">
         
-        <!-- 你原来的 Custom -->
+        <!-- 你原来的 Custom（图片全部保留） -->
         <div class="menu-card" data-category="custom cocktail alcoholic">
             <div class="badge">Best Seller ✨</div>
             <p class="dish-name">1. Bartender Special</p>
+            <img src="bartenderspecial.jpg" class="menu-img" alt="Bartender Special">
             <button onclick="addToCart('Bartender Special', 0)">Add to Cart</button>
         </div>
         
         <div class="menu-card" data-category="custom cocktail alcoholic">
             <p class="dish-name">2. Ruhglanz</p>
+            <img src="ruhglanz.jpg" class="menu-img" alt="Ruhglanz">
             <button onclick="addToCart('Ruhglanz', 0)">Add to Cart</button>
         </div>
         
         <div class="menu-card" data-category="custom cocktail alcoholic">
             <p class="dish-name">3. Curated by Khaimin</p>
+            <img src="curatedbykhaimin.jpg" class="menu-img" alt="Curated by Khaimin">
             <button onclick="addToCart('Curated by Khaimin', 0)">Add to Cart</button>
         </div>
 
-        <!-- 无酒精 -->
+        <!-- 无酒精（图片全部保留） -->
         <div class="menu-card" data-category="non-alcoholic mocktail">
             <p class="dish-name">4. Mojito (Virgin)</p>
+            <img src="mojito.jpg" class="menu-img" alt="Mojito">
             <button onclick="addToCart('Mojito (Virgin)', 0)">Add to Cart</button>
         </div>
         
         <div class="menu-card" data-category="non-alcoholic mocktail">
             <p class="dish-name">5. Mocktail</p>
+            <img src="mocktail.jpg" class="menu-img" alt="Mocktail">
             <button onclick="addToCart('Mocktail', 0)">Add to Cart</button>
         </div>
         
         <div class="menu-card" data-category="non-alcoholic">
             <p class="dish-name">6. Strawberry Smoothie</p>
+            <img src="milkshake.jpg" class="menu-img" alt="Smoothie">
             <button onclick="addToCart('Strawberry Smoothie', 0)">Add to Cart</button>
         </div>
 
-        <!-- Gin Cocktails -->
+        <!-- Gin Cocktails（无图片，符合要求） -->
         <div class="menu-card" data-category="cocktail alcoholic">
             <p class="dish-name">7. Martini</p>
             <button onclick="addToCart('Martini', 0)">Add to Cart</button>
@@ -76,7 +82,7 @@
             <button onclick="addToCart('Kelly\'s Legacy', 0)">Add to Cart</button>
         </div>
 
-        <!-- Tequila Cocktails -->
+        <!-- Tequila Cocktails（无图片） -->
         <div class="menu-card" data-category="cocktail alcoholic">
             <p class="dish-name">12. Margarita</p>
             <button onclick="addToCart('Margarita', 0)">Add to Cart</button>
@@ -94,7 +100,7 @@
             <button onclick="addToCart('Tequila Ale', 0)">Add to Cart</button>
         </div>
 
-        <!-- Rum Cocktails -->
+        <!-- Rum Cocktails（无图片） -->
         <div class="menu-card" data-category="cocktail alcoholic">
             <p class="dish-name">16. Daiquiri</p>
             <button onclick="addToCart('Daiquiri', 0)">Add to Cart</button>
@@ -104,7 +110,7 @@
             <button onclick="addToCart('Mojito', 0)">Add to Cart</button>
         </div>
 
-        <!-- Whiskey Cocktails -->
+        <!-- Whiskey Cocktails（无图片） -->
         <div class="menu-card" data-category="cocktail alcoholic">
             <p class="dish-name">18. Adventurous Jack</p>
             <button onclick="addToCart('Adventurous Jack', 0)">Add to Cart</button>
@@ -114,7 +120,7 @@
             <button onclick="addToCart('Old Fashioned', 0)">Add to Cart</button>
         </div>
 
-        <!-- Vodka Cocktails -->
+        <!-- Vodka Cocktails（无图片） -->
         <div class="menu-card" data-category="cocktail alcoholic">
             <p class="dish-name">20. Vodka Martini</p>
             <button onclick="addToCart('Vodka Martini', 0)">Add to Cart</button>
@@ -128,7 +134,7 @@
             <button onclick="addToCart('Fruit Punch', 0)">Add to Cart</button>
         </div>
 
-        <!-- Brandy Cocktails -->
+        <!-- Brandy Cocktails（无图片） -->
         <div class="menu-card" data-category="cocktail alcoholic">
             <p class="dish-name">23. Great William</p>
             <button onclick="addToCart('Great William', 0)">Add to Cart</button>
@@ -143,10 +149,12 @@
     <div id="toast" class="toast-hidden">Added to your tray! 🍸</div>
 
     <div id="cart-container" class="cart-container">
+        
         <div id="cart-modal" class="modal-content">
             <div id="cart-items-list"></div>
             <div class="modal-footer">
-                <div class="total-row"></div>
+                <div class="total-row">
+                </div>
                 <button class="checkout-btn" onclick="sendWhatsAppOrder()">Confirm & Order 🍹</button>
             </div>
         </div>
@@ -158,6 +166,7 @@
             <p class="tap-hint">Tap to view</p >
             <button id="order-now-btn" onclick="sendWhatsAppOrder(); event.stopPropagation();">Order Now</button>
         </div>
+
     </div>
 
     <script src="script.js"></script>
