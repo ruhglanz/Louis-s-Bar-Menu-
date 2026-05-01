@@ -96,7 +96,7 @@ function sendWhatsAppOrder() {
         orderText += `• ${name} (x${cart[name].qty})\n`;
     }
     orderText += `\nThank you! 🍹`;
-    const phoneNumber = "601116260164";
+    const phoneNumber = "60182490922";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(orderText)}`;
     window.location.href = url;
 }
